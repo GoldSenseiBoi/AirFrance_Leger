@@ -16,6 +16,11 @@
                     <img src="images/AF.jpg"  alt="Logo" width="55" height="40" class="d-inline-block align-text-top">
                     <h4>Air France</h4>
                     </a>
+                    <!-- Ajouter le formulaire de recherche -->
+                    <form class="d-flex" action="recherche.php" method="GET">
+                        <input class="form-control me-2" type="search" placeholder="Rechercher une destination" aria-label="Search" name="q">
+                        <button class="btn btn-outline-success" type="submit">Rechercher</button>
+                    </form>
                 </div>
                 </nav>
     <div class="container">
@@ -59,4 +64,3 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>
-
