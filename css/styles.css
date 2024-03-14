@@ -3,5 +3,20 @@
     flex-direction: row;
     margin: 20px;
     padding: 20px;
+    width: 110%;
     flex-wrap: wrap;
+}
+.container{
+    display: flex;
+    flex-direction:column;
+    padding: 20px;
+    width: 850px;
+}
+
+.titre2{
+    padding: 20px;
+}
+
+.titre1{
+    padding: 20px;
 }
