@@ -1,10 +1,10 @@
--- Création de la base de données AirFrance
+-- la base de données AirFrance
 CREATE DATABASE IF NOT EXISTS AirFrance;
 
 
 USE AirFrance;
 
--- Tables principales
+
 
 CREATE TABLE Avion (
     ID_Avion INT AUTO_INCREMENT PRIMARY KEY,
