@@ -27,7 +27,7 @@
         <div class="ms-auto d-flex align-items-center">
                 <a href="connexion.php" class="btn btn-primary me-2">Connexion</a>
                 <a href="inscription.php" class="btn btn-primary me-2">Inscription</a>
-                <a href="#" class="btn btn-primary">Connecter en tant qu'Admin</a>
+                <a href="admin_login.php" class="btn btn-primary">Connexion Admin</a>
         </div>
         <br />
         <br />
