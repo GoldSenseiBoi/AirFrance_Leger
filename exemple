@@ -1,0 +1,20 @@
+projet Airfrance/
+├── config/
+│   └── database.php
+├── controleurs/
+│   └── ControleurPrincipal.php
+├── modeles/
+│   └── ModelePrincipal.php
+├── vues/
+│   ├── reservation/
+│   │   ├── index.php
+│   │   └── show.php
+│   ├── passager/
+│   │   ├── index.php
+│   │   └── show.php
+│   └── vol/
+│       ├── index.php
+│       └── show.php
+├── public/
+│   └── index.php
+└── .htaccess
