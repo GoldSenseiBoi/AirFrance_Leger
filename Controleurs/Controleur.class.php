@@ -1,6 +1,6 @@
 <?php
 
-require_once 'Modele.class.php';
+require_once 'modeles/Modele.class.php';
 
 class ControleurPrincipal {
     private $volModel;

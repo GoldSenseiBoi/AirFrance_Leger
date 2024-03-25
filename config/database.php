@@ -4,7 +4,7 @@ class ConnexionBD {
     private static $instance = null;
 
     private function __construct() {
-        // Configuration de la base de données
+       
         define('DB_HOST', 'localhost'); // Hôte de la base de données
         define('DB_USER', 'root'); // Nom d'utilisateur de la base de données
         define('DB_PASSWORD', ''); // Mot de passe de la base de données
