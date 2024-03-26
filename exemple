@@ -18,3 +18,6 @@ projet Airfrance/
 ├── public/
 │   └── index.php
 └── .htaccess
+
+
+/*INSERT INTO `admin`( `Prenom`, `Email`, `MotDePasse`) VALUES ("ibrahima","i@gmail.com","456");*/
