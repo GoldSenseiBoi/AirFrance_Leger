@@ -11,7 +11,7 @@
         <h1 class="text-center mb-5">Accueil - Gestion de Compagnie</h1>
         <div class="row">
             <div class="col-md-4">
-                <div class="card">
+                <div class="card" style="margin : 20px;">
                     <div class="card-body">
                         <h5 class="card-title">Aéroports</h5>
                         <p class="card-text">Gérer les aéroports</p>
@@ -20,7 +20,7 @@
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="card">
+                <div class="card" style="margin : 20px;">
                     <div class="card-body">
                         <h5 class="card-title">Réservations</h5>
                         <p class="card-text">Gérer les réservations</p>
@@ -29,7 +29,7 @@
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="card">
+                <div class="card" style="margin : 20px;">
                     <div class="card-body">
                         <h5 class="card-title">Avions</h5>
                         <p class="card-text">Gérer les avions</p>
@@ -38,7 +38,7 @@
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="card">
+                <div class="card" style="margin : 20px;">
                     <div class="card-body">
                         <h5 class="card-title">Passagers</h5>
                         <p class="card-text">Gérer les passagers</p>
@@ -47,7 +47,7 @@
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="card">
+                <div class="card" style="margin : 20px;">
                     <div class="card-body">
                         <h5 class="card-title">Vols</h5>
                         <p class="card-text">Gérer les vols</p>
