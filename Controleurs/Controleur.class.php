@@ -1,6 +1,6 @@
 <?php
 
-require_once 'modeles/modele.class.php';
+require_once '../modeles/modele.class.php';
 
 class ControleurPrincipal {
     private $volModel;
@@ -8,6 +8,8 @@ class ControleurPrincipal {
     private $passagerModel;
     private $reservationModel;
     private $avionModel;
+    private $aeroports;
+    private $vols;
 
     public function __construct() {
         $this->volModel = new VolModel();
@@ -15,6 +17,13 @@ class ControleurPrincipal {
         $this->passagerModel = new PassagerModel();
         $this->reservationModel = new ReservationModel();
         $this->avionModel = new AvionModel();
+        $this->aeroports = $this->aeroportModel->getAllAirports();
+        $vols = $this->volModel->getAllFlights();
+
+    }
+
+    public function getAeroports() {
+        return $this->aeroports;
     }
 
     public function afficherTousVols() {
@@ -28,6 +37,7 @@ class ControleurPrincipal {
     public function afficherTousAeroports() {
         $aeroports = $this->aeroportModel->getAllAirports();
         
+
         foreach ($aeroports as $aeroport) {
             echo "Aéroport : " . $aeroport['Nom'] . " - Localisation : " . $aeroport['Localisation'] . "<br>";
         }
@@ -55,6 +65,12 @@ class ControleurPrincipal {
         foreach ($avions as $avion) {
             echo "Avion : " . $avion['Modele'] . " - Nombre de places : " . $avion['NombrePlaces'] . "<br>";
         }
+
     }
 }
+
+$main_controller = new ControleurPrincipal();
+
+global $main_controller;
+
 ?>

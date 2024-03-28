@@ -1,3 +1,8 @@
+<?php 
+
+    require_once '../Controleurs/Controleur.class.php';
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -16,7 +21,7 @@
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($aeroports as $aeroport): ?>
+            <?php foreach ($main_controller->getAeroports() as $aeroport): ?>
                 <tr>
                     <td><?php echo $aeroport['ID_Aeroport']; ?></td>
                     <td><?php echo $aeroport['Nom']; ?></td>
