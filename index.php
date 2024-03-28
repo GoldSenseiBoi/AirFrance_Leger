@@ -15,7 +15,7 @@
                     <div class="card-body">
                         <h5 class="card-title">Aéroports</h5>
                         <p class="card-text">Gérer les aéroports</p>
-                        <a href="vue_aeroports.php" class="btn btn-primary">Voir les aéroports</a>
+                        <a href="../vues/vue_aeroports.php" class="btn btn-primary">Voir les aéroports</a>
                     </div>
                 </div>
             </div>

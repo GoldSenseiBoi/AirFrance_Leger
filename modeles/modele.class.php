@@ -5,6 +5,8 @@ require_once 'config/database.php';
 class VolModel {
     private $bdd;
 
+    
+
     public function __construct() {
         $this->bdd = ConnexionBD::getInstance();
     }
