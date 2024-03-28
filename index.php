@@ -15,7 +15,7 @@
                     <div class="card-body">
                         <h5 class="card-title">Aéroports</h5>
                         <p class="card-text">Gérer les aéroports</p>
-                        <a href="../vues/vue_aeroports.php" class="btn btn-primary">Voir les aéroports</a>
+                        <a href="vues/vue_aeroports.php" class="btn btn-primary">Voir les aéroports</a>
                     </div>
                 </div>
             </div>
@@ -24,7 +24,7 @@
                     <div class="card-body">
                         <h5 class="card-title">Réservations</h5>
                         <p class="card-text">Gérer les réservations</p>
-                        <a href="vue_reservations.php" class="btn btn-primary">Voir les réservations</a>
+                        <a href="vues/vue_reservations.php" class="btn btn-primary">Voir les réservations</a>
                     </div>
                 </div>
             </div>
@@ -33,7 +33,7 @@
                     <div class="card-body">
                         <h5 class="card-title">Avions</h5>
                         <p class="card-text">Gérer les avions</p>
-                        <a href="vue_avions.php" class="btn btn-primary">Voir les avions</a>
+                        <a href="vues/vue_avions.php" class="btn btn-primary">Voir les avions</a>
                     </div>
                 </div>
             </div>
@@ -42,7 +42,7 @@
                     <div class="card-body">
                         <h5 class="card-title">Passagers</h5>
                         <p class="card-text">Gérer les passagers</p>
-                        <a href="vue_passagers.php" class="btn btn-primary">Voir les passagers</a>
+                        <a href="vues/vue_passagers.php" class="btn btn-primary">Voir les passagers</a>
                     </div>
                 </div>
             </div>
@@ -51,7 +51,7 @@
                     <div class="card-body">
                         <h5 class="card-title">Vols</h5>
                         <p class="card-text">Gérer les vols</p>
-                        <a href="vue_vols.php" class="btn btn-primary">Voir les vols</a>
+                        <a href="vues/vue_vols.php" class="btn btn-primary">Voir les vols</a>
                     </div>
                 </div>
             </div>
