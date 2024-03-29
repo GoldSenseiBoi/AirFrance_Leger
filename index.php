@@ -1,65 +1,78 @@
+<?php
+	session_start();
+	require_once("controleur/controleur.class.php");
+	$unControleur= new Controleur; 
+?>
 <!DOCTYPE html>
-<html lang="fr">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Accueil - Gestion de Compagnie</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<title>Air France</title>
+	<meta charset="utf-8">
 </head>
 <body>
-    <div class="container mt-5">
-        <h1 class="text-center mb-5">Accueil - Gestion de Compagnie</h1>
-        <div class="row">
-            <div class="col-md-4">
-                <div class="card" style="margin : 20px;">
-                    <div class="card-body">
-                        <h5 class="card-title">Aéroports</h5>
-                        <p class="card-text">Gérer les aéroports</p>
-                        <a href="vues/vue_aeroports.php" class="btn btn-primary">Voir les aéroports</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card" style="margin : 20px;">
-                    <div class="card-body">
-                        <h5 class="card-title">Réservations</h5>
-                        <p class="card-text">Gérer les réservations</p>
-                        <a href="vues/vue_reservations.php" class="btn btn-primary">Voir les réservations</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card" style="margin : 20px;">
-                    <div class="card-body">
-                        <h5 class="card-title">Avions</h5>
-                        <p class="card-text">Gérer les avions</p>
-                        <a href="vues/vue_avions.php" class="btn btn-primary">Voir les avions</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card" style="margin : 20px;">
-                    <div class="card-body">
-                        <h5 class="card-title">Passagers</h5>
-                        <p class="card-text">Gérer les passagers</p>
-                        <a href="vues/vue_passagers.php" class="btn btn-primary">Voir les passagers</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card" style="margin : 20px;">
-                    <div class="card-body">
-                        <h5 class="card-title">Vols</h5>
-                        <p class="card-text">Gérer les vols</p>
-                        <a href="vues/vue_vols.php" class="btn btn-primary">Voir les vols</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+	<center>
+		<?php
+		if(!isset($_SESSION['email'])){
+			require_once ("vue/vue_connexion.php");
+		}
+		if (isset($_POST['seConnecter'])){
+			$email = $_POST['email'];
+			$mdp = $_POST['mdp'];
+			$unUser = $unControleur->verifConnexion($email, $mdp);
+			if ($unUser !=null){
+				$_SESSION['nom'] = $unUser['nom'];
+				$_SESSION['prenom'] = $unUser['prenom'];
+				$_SESSION['email'] = $unUser['email'];
+				$_SESSION['role'] = $unUser['role'];
+				header("Location: index.php?page=1");
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+			} else {
+				echo "<br>Votre identifiant ou mot de passe est incorrect";
+			}
+		}
+
+		if  (isset($_SESSION['email'])){
+			echo '
+				<h1>Site d intervention d Orange</h1>s
+				<a href="index.php?page=1">
+					<img src="image/home.png" height="100" width="100" alt="Page d accueil">
+				</a>
+				<a href="index.php?page=2">
+					<img src="image/client.png" height="100" width="100" alt="Gestion des clients">
+				</a>
+				<a href="index.php?page=3">
+					<img src="image/produit.png" height="100" width="100" alt="Gestion des produits">
+				</a>
+				<a href="index.php?page=4">
+					<img src="image/technicien.png" height="100" width="100" alt="Gestion des techniciens">
+				</a>
+				<a href="index.php?page=5">
+					<img src="image/intervention.png" height="100" width="100" alt="Gestion des interventions">
+				</a>
+				<a href="index.php?page=6">
+					<img src="image/deconnexion.png" height="100" width="100" alt="Déconnexion">
+				</a>
+				<h2>Bienvenue chez Orange</h2>
+				</center>';
+				echo "<p style='text-align:center;'> Bonjour ". $_SESSION['prenom'] . ". Vous êtes ". $_SESSION['role']. "</p>";
+		}
+		if(isset($_GET['page'])){
+			$page= $_GET['page'];
+		} else {
+			$page = 1; //Page par défaut= index.php
+		}
+		switch ($page){
+			case 1 : require_once ("index.php"); break;
+			case 2 : require_once ("gestion_client.php"); break;
+			case 3 : require_once ("gestion_produit.php"); break;
+			case 4 : require_once ("gestion_technicien.php"); break;
+			case 5 : require_once ("gestion_intervention.php"); break;
+			case 6 : session_destroy();
+			unset($_SESSION['email']);
+			header("Location: index.php?page=1");
+			break;
+		}
+		?>
+	</center>
 </body>
 </html>
