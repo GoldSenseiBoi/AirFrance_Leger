@@ -30,5 +30,5 @@
 				<input type="reset" name="Annuler" value="Annuler">
 			</td>
 		</tr>
-		<?= ($leClient!=null) ? '<input type="hidden" name="idclient" value="'.$leClient['idclient'].'">':''?>
+		<?= ($leClient!=null) ? '<input type="hidden" name="idpassager" value="'.$leClient['idpassager'].'">':''?>
 	</table> 
