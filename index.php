@@ -58,7 +58,7 @@
 				</a>
 				<h2>Bienvenue chez Air France</h2>
 				</center>';
-				echo "<p style='text-align:center;'> Bonjour ". $_SESSION['prenom'] . "."</p>"";
+				echo "<p style='text-align:center;'> Bonjour ". $_SESSION['prenom'] . ".</p>";
 		}
 		if(isset($_GET['page'])){
 			$page= $_GET['page'];
