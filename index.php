@@ -20,10 +20,8 @@
 			$mdp = $_POST['mdp'];
 			$unUser = $unControleur->verifConnexion($email, $mdp);
 			if ($unUser !=null){
-				$_SESSION['nom'] = $unUser['nom'];
 				$_SESSION['prenom'] = $unUser['prenom'];
 				$_SESSION['email'] = $unUser['email'];
-				$_SESSION['role'] = $unUser['role'];
 				header("Location: index.php?page=1");
 
 			} else {
@@ -33,9 +31,9 @@
 
 		if  (isset($_SESSION['email'])){
 			echo '
-				<h1>Site d intervention d Orange</h1>s
+				<h1>Site de gestion de Air France</h1>s
 				<a href="index.php?page=1">
-					<img src="image/home.png" height="100" width="100" alt="Page d accueil">
+					<img src="images/airfr.jpg" height="100" width="100" alt="Page d accueil">
 				</a>
 				<a href="index.php?page=2">
 					<img src="image/client.png" height="100" width="100" alt="Gestion des clients">
@@ -50,11 +48,17 @@
 					<img src="image/intervention.png" height="100" width="100" alt="Gestion des interventions">
 				</a>
 				<a href="index.php?page=6">
+					<img src="image/technicien.png" height="100" width="100" alt="Gestion des techniciens">
+				</a>
+				<a href="index.php?page=7">
+					<img src="image/intervention.png" height="100" width="100" alt="Gestion des interventions">
+				</a>
+				<a href="index.php?page=8">
 					<img src="image/deconnexion.png" height="100" width="100" alt="Déconnexion">
 				</a>
-				<h2>Bienvenue chez Orange</h2>
+				<h2>Bienvenue chez Air France</h2>
 				</center>';
-				echo "<p style='text-align:center;'> Bonjour ". $_SESSION['prenom'] . ". Vous êtes ". $_SESSION['role']. "</p>";
+				echo "<p style='text-align:center;'> Bonjour ". $_SESSION['prenom'] . "."</p>"";
 		}
 		if(isset($_GET['page'])){
 			$page= $_GET['page'];
@@ -63,11 +67,13 @@
 		}
 		switch ($page){
 			case 1 : require_once ("index.php"); break;
-			case 2 : require_once ("gestion_client.php"); break;
-			case 3 : require_once ("gestion_produit.php"); break;
-			case 4 : require_once ("gestion_technicien.php"); break;
-			case 5 : require_once ("gestion_intervention.php"); break;
-			case 6 : session_destroy();
+			case 2 : require_once ("gestion_aeroport.php"); break;
+			case 3 : require_once ("gestion_avion.php"); break;
+			case 4 : require_once ("gestion_vols.php"); break;
+			case 5 : require_once ("gestion_reservation.php"); break;
+			case 6 : require_once ("gestion_passager.php"); break;
+			case 7 : require_once ("gestion_menbreequipage.php"); break;
+			case 8 : session_destroy();
 			unset($_SESSION['email']);
 			header("Location: index.php?page=1");
 			break;
