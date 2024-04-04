@@ -32,27 +32,27 @@
 
 		if  (isset($_SESSION['email'])){
 			echo '
-				<h1>Site de gestion de Air France</h1>s
+				<h1>Site de gestion de Air France</h1>
 				<a href="index.php?page=1">
-					<img src="images/airfr.jpg" height="100" width="100" alt="Page d accueil">
+					<img src="image/accueil.png" height="100" width="100" alt="">
 				</a>
 				<a href="index.php?page=2">
-					<img src="image/client.png" height="100" width="100" alt="Gestion des clients">
+					<img src="image/aeroport.jpg" height="100" width="100" alt="Gestion des passagers">
 				</a>
 				<a href="index.php?page=3">
-					<img src="image/produit.png" height="100" width="100" alt="Gestion des produits">
+					<img src="image/avion.png" height="100" width="100" alt="Gestion des produits">
 				</a>
 				<a href="index.php?page=4">
-					<img src="image/technicien.png" height="100" width="100" alt="Gestion des techniciens">
+					<img src="image/vols.png" height="100" width="100" alt="Gestion des techniciens">
 				</a>
 				<a href="index.php?page=5">
-					<img src="image/intervention.png" height="100" width="100" alt="Gestion des interventions">
+					<img src="image/reserve.png" height="100" width="100" alt="Gestion des interventions">
 				</a>
 				<a href="index.php?page=6">
-					<img src="image/technicien.png" height="100" width="100" alt="Gestion des techniciens">
+					<img src="image/passager.png" height="100" width="100" alt="Gestion des techniciens">
 				</a>
 				<a href="index.php?page=7">
-					<img src="image/intervention.png" height="100" width="100" alt="Gestion des interventions">
+					<img src="image/menbre.png" height="100" width="100" alt="Gestion des interventions">
 				</a>
 				<a href="index.php?page=8">
 					<img src="image/deconnexion.png" height="100" width="100" alt="Déconnexion">
