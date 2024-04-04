@@ -1,5 +1,6 @@
 <h2>Gestion des membres de l'équipage</h2>
 <?php
+
 	require_once("vue/vue_insert_menbreequipage.php");
 	if (isset($_POST['Valider'])){
 		$unControleur->insertMembresEquipage($_POST);
