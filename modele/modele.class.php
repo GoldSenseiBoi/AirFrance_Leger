@@ -3,7 +3,7 @@
 		private $unPDO;
 		public function __construct(){
 			try {
-				$url="mysql:host=localhost;dbname=airfrance";
+				$url="mysql:host=localhost;dbname=airfrance2";
 				$user="root";
 				$mdp="";
 				$this->unPDO= new PDO ($url, $user, $mdp);
@@ -12,7 +12,7 @@
 				echo "Erreur de connexion: ".$exp->getMessage();
 			}
 		}
-		public function insertPassager($tab){
+		public function insertPassagers($tab){
 			$requete = "INSERT INTO passagers (ID_Personne, NumPasseport) VALUES (:idPersonne, :numPasseport)";
 			$donnees = array(
 				":idPersonne" => $tab['ID_Personne'],
@@ -339,7 +339,7 @@
 			return $select->fetch();
 		}
 		public function verifConnexion($email, $mdp){
-			$requete="select * from user where email=:email and mdp=:mdp ";
+			$requete="select * from admin where Email=:email and MotDePasse=:mdp ";
 			$donnees=array(":email"=>$email, ":mdp"=>$mdp);
 			$select=$this->unPDO->prepare($requete);
 			$select->execute($donnees);

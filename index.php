@@ -19,10 +19,11 @@
 			$email = $_POST['email'];
 			$mdp = $_POST['mdp'];
 			$unUser = $unControleur->verifConnexion($email, $mdp);
+	
 			if ($unUser !=null){
-				$_SESSION['prenom'] = $unUser['prenom'];
-				$_SESSION['email'] = $unUser['email'];
-				header("Location: index.php?page=1");
+				$_SESSION['prenom'] = $unUser['Prenom'];
+				$_SESSION['email'] = $unUser['Email'];
+				//header("Location: index.php?page=1");
 
 			} else {
 				echo "<br>Votre identifiant ou mot de passe est incorrect";
