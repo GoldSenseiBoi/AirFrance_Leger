@@ -5,7 +5,7 @@
             <td>Passager</td>
             <td>
                 <select name="ID_Passager">
-                    <?php foreach ($listePassagers as $passager) : ?>
+                    <?php foreach ($lesPassagers as $passager) : ?>
                         <option value="<?= $passager['ID_Passager'] ?>" <?= ($lReservation != null && $lReservation['ID_Passager'] == $passager['ID_Passager']) ? 'selected' : '' ?>>
                             <?= $passager['Nom'] . ' ' . $passager['Prenom'] ?>
                         </option>
@@ -17,7 +17,7 @@
             <td>Vol</td>
             <td>
                 <select name="ID_Vol">
-                    <?php foreach ($listeVols as $vol) : ?>
+                    <?php foreach ($lesVols as $vol) : ?>
                         <option value="<?= $vol['ID_Vol'] ?>" <?= ($lReservation != null && $lReservation['ID_Vol'] == $vol['ID_Vol']) ? 'selected' : '' ?>>
                             <?= $vol['NumeroVol'] ?>
                         </option>

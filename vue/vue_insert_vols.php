@@ -49,7 +49,7 @@
             <td>Avion</td>
             <td>
                 <select name="Avion">
-                    <?php foreach ($listeAvions as $avion) : ?>
+                    <?php foreach ($lesAvions as $avion) : ?>
                         <option value="<?= $avion['ID_Avion'] ?>" <?= ($leVol != null && $leVol['Avion'] == $avion['ID_Avion']) ? 'selected' : '' ?>>
                             <?= $avion['Modele'] ?>
                         </option>

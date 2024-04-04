@@ -8,6 +8,6 @@
 	if (isset($_POST['Valider'])){
 		$unControleur->insertVol($_POST);
 	}
-	$lesVols= $unControleur->selectAllVol ();
+	$lesVols= $unControleur->selectAllVols ();
 	require_once("vue/vue_select_vols.php");
 ?>
