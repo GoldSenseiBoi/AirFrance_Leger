@@ -6,6 +6,6 @@ $lAeroport = null;
 	if (isset($_POST['Valider'])){
 		$unControleur->insertAeroport($_POST);
 	}
-	$lesAeroports= $unControleur->selectAllAeroports ();
+	$lesAeroports= $unControleur->selectAllAeroports();
 	require_once("vue/vue_select_aeroports.php");
 ?>

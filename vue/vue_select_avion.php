@@ -17,7 +17,7 @@
             echo "<tr>";
             echo "<td>".$avion['ID_Avion']."</td>";
             echo "<td>".$avion['Modele']."</td>";
-            echo "<td>".$avion['NbSieges']."</td>";
+            echo "<td>".$avion['NombrePlaces']."</td>";
             if (isset($_SESSION['role']) && $_SESSION['role'] == 'admin') {
                 echo "<td>";
                 echo "<a href='index.php?page=2&action=sup&idAvion=".$avion['ID_Avion']."'><img src='image/supprimer.png' height='30' width='30'></a>";

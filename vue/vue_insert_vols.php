@@ -17,7 +17,7 @@
             <td>Aéroport de départ</td>
             <td>
                 <select name="AeroportDepart">
-                    <?php foreach ($listeAeroports as $aeroport) : ?>
+                    <?php foreach ($lesAeroports as $aeroport) : ?>
                         <option value="<?= $aeroport['ID_Aeroport'] ?>" <?= ($leVol != null && $leVol['AeroportDepart'] == $aeroport['ID_Aeroport']) ? 'selected' : '' ?>>
                             <?= $aeroport['Nom'] ?>
                         </option>
@@ -37,7 +37,7 @@
             <td>Aéroport d'arrivée</td>
             <td>
                 <select name="AeroportArrivee">
-                    <?php foreach ($listeAeroports as $aeroport) : ?>
+                    <?php foreach ($lesAeroports as $aeroport) : ?>
                         <option value="<?= $aeroport['ID_Aeroport'] ?>" <?= ($leVol != null && $leVol['AeroportArrivee'] == $aeroport['ID_Aeroport']) ? 'selected' : '' ?>>
                             <?= $aeroport['Nom'] ?>
                         </option>

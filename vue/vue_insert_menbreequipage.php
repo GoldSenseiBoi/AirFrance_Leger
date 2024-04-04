@@ -3,11 +3,11 @@
     <table>
         <tr>
             <td>ID Membre d'équipage</td>
-            <td><input type="text" name="ID_MembreEquipage" value="<?= ($leMembre != null) ? $leMembre['ID_MembreEquipage'] : '' ?>"></td>
+            <td><input type="text" name="ID_MembreEquipage" value="<?= ($lMembre != null) ? $lMembre['ID_MembreEquipage'] : '' ?>"></td>
         </tr>
         <tr>
             <td>ID Personne</td>
-            <td><input type="text" name="ID_Personne" value="<?= ($leMembre != null) ? $leMembre['ID_Personne'] : '' ?>"></td>
+            <td><input type="text" name="ID_Personne" value="<?= ($lMembre != null) ? $lMembre['ID_Personne'] : '' ?>"></td>
         </tr>
         <tr>
             <td>Rôle</td>
