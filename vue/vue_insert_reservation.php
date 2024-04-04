@@ -7,7 +7,7 @@
                 <select name="ID_Passager">
                     <?php foreach ($lesPassagers as $passager) : ?>
                         <option value="<?= $passager['ID_Passager'] ?>" <?= ($lReservation != null && $lReservation['ID_Passager'] == $passager['ID_Passager']) ? 'selected' : '' ?>>
-                            <?= $passager['Nom'] . ' ' . $passager['Prenom'] ?>
+                            <?= $passager['NumPasseport']?>
                         </option>
                     <?php endforeach; ?>
                 </select>

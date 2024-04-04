@@ -32,6 +32,7 @@
 		$lesPassagers=$unControleur->selectLikePassager($filtre);
 		require_once("vue/vue_select_passager.php");
 	} else {
+		
 		$lesPassagers= $unControleur->selectAllPassagers ();
 		require_once("vue/vue_select_passager.php");
 	}
