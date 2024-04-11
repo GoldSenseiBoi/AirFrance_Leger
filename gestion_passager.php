@@ -23,7 +23,7 @@
 		}
 		if (isset($_POST['Modifier'])){
 			$unControleur->updatePassager($_POST);
-			header("Location: index.php?page=2");
+			header("Location: index.php?page=6");
 		}
 	}
 

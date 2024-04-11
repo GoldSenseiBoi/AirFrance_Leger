@@ -20,9 +20,9 @@
             echo "<td>".$passager['ID_Personne']."</td>";
             if (isset($_SESSION['role']) && $_SESSION['role'] == 'admin') {
                 echo "<td>";
-                echo "<a href='index.php?page=2&action=sup&idPassager=".$passager['ID_Passager']."'><img src='image/supprimer.png' height='30' width='30'></a>";
-                echo "<a href='index.php?page=2&action=edit&idPassager=".$passager['ID_Passager']."'><img src='image/editer.png' height='30' width='30'></a>";
-                echo "<a href='index.php?page=2&action=voir&idPassager=".$passager['ID_Passager']."'><img src='image/voire.png' height='30' width='30'></a>";
+                echo "<a href='index.php?page=6&action=sup&idPassager=".$passager['ID_Passager']."'><img src='image/supprimer.png' height='30' width='30'></a>";
+                echo "<a href='index.php?page=6&action=edit&idPassager=".$passager['ID_Passager']."'><img src='image/editer.png' height='30' width='30'></a>";
+                echo "<a href='index.php?page=6&action=voir&idPassager=".$passager['ID_Passager']."'><img src='image/voire.png' height='30' width='30'></a>";
                 echo "</td>";
             }
             echo "</tr>";

@@ -23,9 +23,9 @@
             echo "<td>".$unMembreEquipage['DateEmbauche']."</td>";
             echo "<td>".$unMembreEquipage['ID_Vol']."</td>";
             echo "<td>";
-            echo "<a href='index.php?page=2&action=sup&idmembreequipage=".$unMembreEquipage['ID_MembreEquipage']."'><img src='image/supprimer.png' height='30' width='30'></a>";
-            echo "<a href='index.php?page=2&action=edit&idmembreequipage=".$unMembreEquipage['ID_MembreEquipage']."'><img src='image/editer.png' height='30' width='30'></a>";
-            echo "<a href='index.php?page=2&action=voir&idmembreequipage=".$unMembreEquipage['ID_MembreEquipage']."'><img src='image/voire.png' height='30' width='30'></a>";
+            echo "<a href='index.php?page=7&action=sup&idmembreequipage=".$unMembreEquipage['ID_MembreEquipage']."'><img src='image/supprimer.png' height='30' width='30'></a>";
+            echo "<a href='index.php?page=7&action=edit&idmembreequipage=".$unMembreEquipage['ID_MembreEquipage']."'><img src='image/editer.png' height='30' width='30'></a>";
+            echo "<a href='index.php?page=7&action=voir&idmembreequipage=".$unMembreEquipage['ID_MembreEquipage']."'><img src='image/voire.png' height='30' width='30'></a>";
             echo "</td>";
             echo "</tr>";
         }
