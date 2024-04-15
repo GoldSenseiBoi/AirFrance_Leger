@@ -18,13 +18,12 @@
             echo "<td>".$aeroport['ID_Aeroport']."</td>";
             echo "<td>".$aeroport['Nom']."</td>";
             echo "<td>".$aeroport['Localisation']."</td>";
-            if (isset($_SESSION['role']) && $_SESSION['role'] == 'admin') {
-                echo "<td>";
-                echo "<a href='index.php?page=2&action=sup&idAeroport=".$aeroport['ID_Aeroport']."'><img src='image/supprimer.png' height='30' width='30'></a>";
-                echo "<a href='index.php?page=2&action=edit&idAeroport=".$aeroport['ID_Aeroport']."'><img src='image/editer.png' height='30' width='30'></a>";
-                echo "<a href='index.php?page=2&action=voir&idAeroport=".$aeroport['ID_Aeroport']."'><img src='image/voire.png' height='30' width='30'></a>";
-                echo "</td>";
-            }
+            echo "<td>";
+            echo "<a href='index.php?page=2&action=sup&idAeroport=".$aeroport['ID_Aeroport']."'><img src='image/supprimer.png' height='30' width='30'></a>";
+            echo "<a href='index.php?page=2&action=edit&idAeroport=".$aeroport['ID_Aeroport']."'><img src='image/editer.png' height='30' width='30'></a>";
+            echo "<a href='index.php?page=2&action=voir&idAeroport=".$aeroport['ID_Aeroport']."'><img src='image/voire.png' height='30' width='30'></a>";
+            echo "</td>";
+            
             echo "</tr>";
         }
     }
