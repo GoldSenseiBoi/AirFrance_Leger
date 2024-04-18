@@ -12,41 +12,39 @@
 
         switch ($action){
             case "sup" : 
-                // Appel de la fonction pour supprimer un aéroport
-                $lAeroport = $unControleur->deleteAeroport($idAeroport); 
+                
+                $unControleur->deleteAeroport($idAeroport); 
                 
                 break; 
             case "edit" : 
-                // Sélection d'un aéroport pour édition
+                
                 $lAeroport = $unControleur->selectWhereAeroport($idAeroport);  
                 break;
             case "voir" :
-                // Affichage des détails de l'aéroport
+                
                 $detailsAeroport = $unControleur->selectWhereAeroport($idAeroport);
                 break;  
         }
     }
 
-    // Inclusion du formulaire d'insertion d'aéroport
+    
     require_once ("vue/vue_insert_aeroport.php"); 
 
-    // Traitement de l'insertion d'un nouvel aéroport
+    
     if(isset($_POST['Valider'])){
-        //$unControleur->insertAeroport($_POST);
+        $unControleur->insertAeroport($_POST);
 
-        // Appel de la procédure stockée 
-        $nomP = "insertAeroport"; 
-        $tab = array($_POST['Nom'], $_POST['Localisation']);
-        $unControleur->appelProcedure($nomP, $tab);
+        
+        
     }
 
-    // Traitement de la modification d'un aéroport
+    
     if (isset($_POST['Modifier'])){
         $unControleur->updateAeroport($_POST); 
         header("Location: index.php?page=2");
     }
 
- //fin if admin
+ 
 
 // Filtrage des aéroports
 if(isset($_POST['Filtrer'])){

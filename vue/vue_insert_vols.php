@@ -1,3 +1,10 @@
+<?php
+// Initialisation de $leVol à null si elle n'est pas définie
+if (!isset($leVol)) {
+    $leVol = null;
+}
+?>
+
 <h3>Ajout/Modification d'un vol</h3>
 <form method="post">
     <table>

@@ -1,12 +1,55 @@
-<h2>Gestion des réservations</h2>
+<h2> Gestion des réservations </h2>
+
 <?php
-	$lReservation = null;
-	$lesPassagers= $unControleur->selectAllPassagers ();
-	$lesVols= $unControleur->selectAllVols ();
-	require_once("vue/vue_insert_reservation.php");
-	if (isset($_POST['Valider'])){
-		$unControleur->insertReservation($_POST);
-	}
-	$lesReservations= $unControleur->selectAllReservations ();
-	require_once("vue/vue_select_reservation.php");
+
+// Vérification des actions sur les réservations
+$reservation = null;
+if(isset($_GET['action']) && isset($_GET['idReservation'])){
+    $idReservation = $_GET['idReservation']; 
+    $action = $_GET['action']; 
+
+    switch ($action){
+        case "sup" : 
+            $unControleur->deleteReservation($idReservation); 
+            break; 
+        case "edit" : 
+            $reservation = $unControleur->selectWhereReservation($idReservation);  
+            break;
+        case "voir" :
+            $detailsReservation = $unControleur->selectWhereReservation($idReservation);
+            break;  
+    }
+}
+
+// Inclusion de la vue pour insérer une réservation
+require_once ("vue/vue_insert_reservation.php"); 
+
+// Insertion d'une nouvelle réservation
+if(isset($_POST['Valider'])){
+    $unControleur->insertReservation($_POST);
+}
+
+// Mise à jour d'une réservation
+if (isset($_POST['Modifier'])){
+    $unControleur->updateReservation($_POST); 
+    header("Location: index.php?page=2");
+}
+
+// Filtrage des réservations
+if(isset($_POST['Filtrer'])){
+    $filtre = $_POST['filtre']; 
+    $lesReservations = $unControleur->selectLikeReservation($filtre); 
+} else {
+    $lesReservations = $unControleur->selectAllReservations();
+}
+
+// Affichage du nombre de réservations
+$nbReservations = $unControleur->count("reservations")['nb']; 
+echo "<br> Nombre de réservations : ".$nbReservations; 
+
+// Inclusion de la vue pour afficher la liste des réservations
+require_once("vue/vue_select_reservations.php");
+
+// Affichage des détails de la réservation si disponible
+
 ?>
