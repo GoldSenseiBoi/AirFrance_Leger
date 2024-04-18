@@ -2,13 +2,14 @@
 	session_start();
 	require_once("controleur/controleur.class.php");
 	$unControleur= new Controleur; 
-
 ?>
 <!DOCTYPE html>
 <html>
 <head>
 	<title>Air France</title>
 	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
 	<center>

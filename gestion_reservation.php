@@ -3,7 +3,9 @@
 <?php
 
 // Vérification des actions sur les réservations
-$reservation = null;
+$lReservation = null;
+$lesPassagers= $unControleur->selectAllPassagers ();
+$lesVols= $unControleur->selectAllVols ();
 if(isset($_GET['action']) && isset($_GET['idReservation'])){
     $idReservation = $_GET['idReservation']; 
     $action = $_GET['action']; 
@@ -13,7 +15,7 @@ if(isset($_GET['action']) && isset($_GET['idReservation'])){
             $unControleur->deleteReservation($idReservation); 
             break; 
         case "edit" : 
-            $reservation = $unControleur->selectWhereReservation($idReservation);  
+            $lReservation = $unControleur->selectWhereReservation($idReservation);  
             break;
         case "voir" :
             $detailsReservation = $unControleur->selectWhereReservation($idReservation);
@@ -48,7 +50,7 @@ $nbReservations = $unControleur->count("reservations")['nb'];
 echo "<br> Nombre de réservations : ".$nbReservations; 
 
 // Inclusion de la vue pour afficher la liste des réservations
-require_once("vue/vue_select_reservations.php");
+require_once("vue/vue_select_reservation.php");
 
 // Affichage des détails de la réservation si disponible
 

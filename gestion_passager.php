@@ -3,7 +3,7 @@
 <?php
 
 // Vérification des actions sur les passagers
-$passager = null;
+$lePassager = null;
 if(isset($_GET['action']) && isset($_GET['idPassager'])){
     $idPassager = $_GET['idPassager']; 
     $action = $_GET['action']; 
@@ -13,7 +13,7 @@ if(isset($_GET['action']) && isset($_GET['idPassager'])){
             $unControleur->deletePassager($idPassager); 
             break; 
         case "edit" : 
-            $passager = $unControleur->selectWherePassager($idPassager);  
+            $lePassager = $unControleur->selectWherePassager($idPassager);  
             break;
         case "voir" :
             $detailsPassager = $unControleur->selectWherePassager($idPassager);
@@ -48,7 +48,7 @@ $nbPassagers = $unControleur->count("passagers")['nb'];
 echo "<br> Nombre de passagers : ".$nbPassagers; 
 
 // Inclusion de la vue pour afficher la liste des passagers
-require_once("vue/vue_select_passagers.php");
+require_once("vue/vue_select_passager.php");
 
 // Affichage des détails du passager si disponible
 
