@@ -1,4 +1,5 @@
 <h3>Liste des aéroports</h3>
+
 <form method="post">
     <p>Filtrer par : </p><input type="text" name="filtre">
     <input type="submit" name="filtrer" value="Filtrer">
@@ -26,6 +27,7 @@
             
             echo "</tr>";
         }
+        
     }
     ?>
 </table>

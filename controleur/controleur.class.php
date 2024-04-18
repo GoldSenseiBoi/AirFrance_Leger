@@ -1,7 +1,10 @@
 <?php
 	require_once("modele/modele.class.php");
+
 	class Controleur{
+
 		private $unModele;
+
 		public function __construct(){
 			$this->unModele= new Modele();
 		}
@@ -116,5 +119,7 @@
 		public function verifConnexion ($email, $mdp){
 			return $this->unModele->verifConnexion($email, $mdp);
 		}
+
+		
 	}
 ?>
