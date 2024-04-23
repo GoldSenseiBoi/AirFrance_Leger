@@ -143,8 +143,17 @@
 						</div>
 					</div>
 				</div>
-				<h2 class="text-center">Bienvenue chez Air France</h2>';
-			echo "<p style='text-align:center;'> Bonjour ". $_SESSION['prenom'] . ".</p>";
+				';
+				echo "<div class='container'>
+				<div class='row'>
+					<div class='col-md-8 offset-md-2 text-center'>
+						<h1>Bienvenue sur le portail de gestion Air France</h1>
+						<p class='lead'>Bonjour ". $_SESSION['prenom'] . " accéder aux fonctionnalités de gestion des vols, des passagers, des aéroports et plus encore.</p>
+					</div>
+				</div>
+			  </div>";
+		
+			
 		}
 		if(isset($_GET['page'])){
 			$page= $_GET['page'];
