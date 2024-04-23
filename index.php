@@ -10,9 +10,35 @@
 	<meta charset="utf-8">
 	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="styles.css">
+	<style>
+		.container {
+			margin-top: 50px;
+		}
+		.card {
+			margin-bottom: 20px;
+		}
+		.card-img-top {
+			width: 100px;
+			height: 100px;
+			object-fit: cover;
+		}
+		.card-title {
+			text-align: center;
+			margin-top: 10px;
+		}
+		.footer {
+			
+			
+			width: 100%;
+			background-color: #f8f9fa;
+			padding: 10px 0;
+			text-align: center;
+		}
+	</style>
 </head>
 <body>
-	<center>
+
+	<div class="container">
 		<?php
 		if(!isset($_SESSION['email'])){
 			require_once ("vue/vue_connexion.php");
@@ -34,34 +60,91 @@
 
 		if  (isset($_SESSION['email'])){
 			echo '
-				<h1>Site de gestion de Air France</h1>
-				<a href="index.php?page=1">
-					<img src="image/accueil.png" height="100" width="100" alt="">
-				</a>
-				<a href="index.php?page=2">
-					<img src="image/aeroport.jpg" height="100" width="100" alt="Gestion des passagers">
-				</a>
-				<a href="index.php?page=3">
-					<img src="image/avion.png" height="100" width="100" alt="Gestion des produits">
-				</a>
-				<a href="index.php?page=4">
-					<img src="image/vols.png" height="100" width="100" alt="Gestion des techniciens">
-				</a>
-				<a href="index.php?page=5">
-					<img src="image/reserve.png" height="100" width="100" alt="Gestion des interventions">
-				</a>
-				<a href="index.php?page=6">
-					<img src="image/passager.png" height="100" width="100" alt="Gestion des techniciens">
-				</a>
-				<a href="index.php?page=7">
-					<img src="image/menbre.png" height="100" width="100" alt="Gestion des interventions">
-				</a>
-				<a href="index.php?page=8">
-					<img src="image/deconnexion.png" height="100" width="100" alt="Déconnexion">
-				</a>
-				<h2>Bienvenue chez Air France</h2>
-				</center>';
-				echo "<p style='text-align:center;'> Bonjour ". $_SESSION['prenom'] . ".</p>";
+				<h1 class="text-center">Site de gestion de Air France</h1>
+				<div class="row justify-content-center">
+					<div class="col-md-3">
+						<div class="card text-center">
+							<div class="card-body">
+								<a href="index.php?page=1" title="Accueil">
+									<img src="image/accueil.png" class="card-img-top" alt="Accueil">
+								</a>
+								<h5 class="card-title">Accueil</h5>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-3">
+						<div class="card text-center">
+							<div class="card-body">
+								<a href="index.php?page=2" title="Gestion des aéroports">
+									<img src="image/aeroport.jpg" class="card-img-top" alt="Gestion des aéroports">
+								</a>
+								<h5 class="card-title">Gestion des aéroports</h5>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-3">
+						<div class="card text-center">
+							<div class="card-body">
+								<a href="index.php?page=3" title="Gestion des avions">
+									<img src="image/avion.png" class="card-img-top" alt="Gestion des avions">
+								</a>
+								<h5 class="card-title">Gestion des avions</h5>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-3">
+						<div class="card text-center">
+							<div class="card-body">
+								<a href="index.php?page=4" title="Gestion des vols">
+									<img src="image/vols.png" class="card-img-top" alt="Gestion des vols">
+								</a>
+								<h5 class="card-title">Gestion des vols</h5>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-3">
+						<div class="card text-center">
+							<div class="card-body">
+								<a href="index.php?page=5" title="Réservations">
+									<img src="image/reserve.png" class="card-img-top" alt="Réservations">
+								</a>
+								<h5 class="card-title">Réservations</h5>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-3">
+						<div class="card text-center">
+							<div class="card-body">
+								<a href="index.php?page=6" title="Gestion des passagers">
+									<img src="image/passager.png" class="card-img-top" alt="Gestion des passagers">
+								</a>
+								<h5 class="card-title">Gestion des passagers</h5>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-3">
+						<div class="card text-center">
+							<div class="card-body">
+								<a href="index.php?page=7" title="Gestion des membres équipage">
+									<img src="image/menbre.png" class="card-img-top" alt="Gestion des membres équipage">
+								</a>
+								<h5 class="card-title">Gestion des membres équipage</h5>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-3">
+						<div class="card text-center">
+							<div class="card-body">
+								<a href="index.php?page=8" title="Déconnexion">
+									<img src="image/deconnexion.png" class="card-img-top" alt="Déconnexion">
+								</a>
+								<h5 class="card-title">Déconnexion</h5>
+							</div>
+						</div>
+					</div>
+				</div>
+				<h2 class="text-center">Bienvenue chez Air France</h2>';
+			echo "<p style='text-align:center;'> Bonjour ". $_SESSION['prenom'] . ".</p>";
 		}
 		if(isset($_GET['page'])){
 			$page= $_GET['page'];
@@ -82,6 +165,11 @@
 			break;
 		}
 		?>
-	</center>
+	</div>
+	<footer class="footer">
+		<div class="container">
+			<span class="text-muted">© 2024 Air France. Tous droits réservés.</span>
+		</div>
+	</footer>
 </body>
 </html>
