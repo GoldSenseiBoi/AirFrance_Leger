@@ -59,8 +59,18 @@
 		}
 
 		if  (isset($_SESSION['email'])){
+			
+			echo "<div class='container'>
+				<div class='row'>
+					<div class='col-md-9 offset-md-2 text-center'>
+						<h1>Bienvenue sur le portail de gestion Air France</h1>
+						<p class='lead'>Bonjour ". $_SESSION['prenom'] . " accéder aux fonctionnalités de gestion des vols, des passagers, des aéroports et plus encore.</p>
+					</div>
+				</div>
+			  </div>";
+			
 			echo '
-				<h1 class="text-center">Site de gestion de Air France</h1>
+				
 				<div class="row justify-content-center">
 					<div class="col-md-3">
 						<div class="card text-center">
@@ -144,14 +154,7 @@
 					</div>
 				</div>
 				';
-				echo "<div class='container'>
-				<div class='row'>
-					<div class='col-md-8 offset-md-2 text-center'>
-						<h1>Bienvenue sur le portail de gestion Air France</h1>
-						<p class='lead'>Bonjour ". $_SESSION['prenom'] . " accéder aux fonctionnalités de gestion des vols, des passagers, des aéroports et plus encore.</p>
-					</div>
-				</div>
-			  </div>";
+				
 		
 			
 		}

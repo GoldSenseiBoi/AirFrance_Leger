@@ -3,7 +3,7 @@
 		private $unPDO;
 		public function __construct(){
 			try {
-				$url="mysql:host=localhost;dbname=airfrance";
+				$url="mysql:host=localhost;dbname=airfrance2";
 				$user="root";
 				$mdp="";
 				$this->unPDO= new PDO ($url, $user, $mdp);
