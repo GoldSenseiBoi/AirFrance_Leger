@@ -32,7 +32,12 @@ if(isset($_POST['Valider'])){
 // Mise à jour d'un membre d'équipage
 if (isset($_POST['Modifier'])){
     $unControleur->updateMembreEquipage($_POST); 
-    header("Location: index.php?page=2");
+    header("Location: index.php?page=7");
+}
+
+if (isset($_POST['Annuler'])){
+    $lAeroport = null;
+    header("Location: index.php?page=7");
 }
 
 // Filtrage des membres d'équipage

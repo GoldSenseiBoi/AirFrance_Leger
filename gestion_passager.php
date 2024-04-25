@@ -32,7 +32,12 @@ if(isset($_POST['Valider'])){
 // Mise à jour d'un passager
 if (isset($_POST['Modifier'])){
     $unControleur->updatePassager($_POST); 
-    header("Location: index.php?page=2");
+    header("Location: index.php?page=6");
+}
+
+if (isset($_POST['Annuler'])){
+    $lAeroport = null;
+    header("Location: index.php?page=6");
 }
 
 // Filtrage des passagers

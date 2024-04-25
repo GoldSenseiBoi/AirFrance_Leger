@@ -32,7 +32,12 @@ if(isset($_POST['Valider'])){
 
 if (isset($_POST['Modifier'])){
     $unControleur->updateAvion($_POST); 
-    header("Location: index.php?page=2");
+    header("Location: index.php?page=3");
+}
+
+if (isset($_POST['Annuler'])){
+    $lAeroport = null;
+    header("Location: index.php?page=3");
 }
 
 // Filtrage des avions

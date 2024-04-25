@@ -1,7 +1,7 @@
 <h3>Liste des membres d'équipage</h3>
 <form method="post">
     <p>Filtrer par : </p><input type="text" name="filtre">
-    <input type="submit" name="filtrer" value="Filtrer">
+    <input type="submit" name="Filtrer" value="Filtrer">
 </form>
 <br>
 <table border="1">

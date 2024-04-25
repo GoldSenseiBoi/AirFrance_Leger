@@ -40,6 +40,11 @@ if (isset($_POST['Modifier'])){
     header("Location: index.php?page=4");
 }
 
+if (isset($_POST['Annuler'])){
+    $lAeroport = null;
+    header("Location: index.php?page=4");
+}
+
 // Filtrage des vols
 if(isset($_POST['Filtrer'])){
     $filtre = $_POST['filtre']; 
