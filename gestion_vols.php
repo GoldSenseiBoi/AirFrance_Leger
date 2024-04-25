@@ -8,8 +8,8 @@ $leVol = null;
 	$lesAeroports= $unControleur->selectAllAeroports (); //Permet d'avoir les aéroports dans le menu déroulant de insert
 	$lesAvions= $unControleur->selectAllAvions ();
 
-if(isset($_GET['action']) && isset($_GET['ID_Vol'])){
-    $idVol = $_GET['ID_Vol']; 
+if(isset($_GET['action']) && isset($_GET['idvol'])){
+    $idVol = $_GET['idvol']; 
     $action = $_GET['action']; 
 
     switch ($action){
@@ -18,6 +18,7 @@ if(isset($_GET['action']) && isset($_GET['ID_Vol'])){
             break; 
         case "edit" : 
             $leVol = $unControleur->selectWhereVol($idVol);  
+     
             break;
         case "voir" :
             $detailsVol = $unControleur->selectWhereVol($idVol);
@@ -36,7 +37,7 @@ if(isset($_POST['Valider'])){
 // Mise à jour d'un vol
 if (isset($_POST['Modifier'])){
     $unControleur->updateVol($_POST); 
-    header("Location: index.php?page=2");
+    header("Location: index.php?page=4");
 }
 
 // Filtrage des vols

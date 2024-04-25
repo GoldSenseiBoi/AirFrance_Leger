@@ -1,8 +1,9 @@
-<h3>Liste des aéroports</h3>
+<?php
+echo '<h3>Liste des aéroports</h3>
 
 <form method="post">
     <p>Filtrer par : </p><input type="text" name="filtre">
-    <input type="submit" name="filtrer" value="Filtrer">
+    <input type="submit" name="Filtrer" value="Filtrer">
 </form>
 <br>
 <table border="1">
@@ -11,8 +12,8 @@
         <td>Nom Aéroport</td>
         <td>Localisation</td>
 		<td>Opération</td>
-    </tr>
-    <?php
+    </tr>';
+
     if (isset($lesAeroports)) {
         foreach ($lesAeroports as $aeroport) {
             echo "<tr>";
@@ -29,5 +30,5 @@
         }
         
     }
+    echo "</table>";
     ?>
-</table>

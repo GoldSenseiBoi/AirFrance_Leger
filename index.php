@@ -39,7 +39,7 @@
 <body>
 
 	<div class="container">
-		<?php
+<?php
 		if(!isset($_SESSION['email'])){
 			require_once ("vue/vue_connexion.php");
 		}
@@ -176,12 +176,13 @@
 			header("Location: index.php?page=1");
 			break;
 		}
-		?>
-	</div>
+echo '
+	</div><br /><br />
 	<footer class="footer">
 		<div class="container">
 			<span class="text-muted">© 2024 Air France. Tous droits réservés.</span>
 		</div>
 	</footer>
 </body>
-</html>
+</html>'; 
+?>

@@ -287,14 +287,14 @@
 		}
 	
 		public function selectAllVols(){
-			$requete = "SELECT * FROM vols";
+			$requete = "SELECT * FROM vue_vols";
 			$select = $this->unPDO->prepare($requete);
 			$select->execute();
 			return $select->fetchAll();
 		}
 	
 		public function selectLikeVol($filtre){
-			$requete = "SELECT * FROM vols WHERE NumeroVol LIKE :filtre";
+			$requete = "SELECT * FROM vue_vols WHERE NumeroVol LIKE :filtre";
 			$donnees = array(":filtre" => "%".$filtre."%");
 			$select = $this->unPDO->prepare($requete);
 			$select->execute($donnees);

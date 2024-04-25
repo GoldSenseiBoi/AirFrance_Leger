@@ -317,3 +317,13 @@ ALTER TABLE `vols`
   ADD CONSTRAINT `vols_ibfk_2` FOREIGN KEY (`AeroportArrivee`) REFERENCES `aeroports` (`ID_Aeroport`),
   ADD CONSTRAINT `vols_ibfk_3` FOREIGN KEY (`Avion`) REFERENCES `avions` (`ID_Avion`);
 COMMIT;
+--
+-- Structure de la vue `vue_vols`
+--
+
+create view vue_vols as (
+select v.ID_Vol, v.NumeroVol,  v.DateDepart, v.DateArrivee, v.HeureDepart, v.HeureArrivee, a.Nom as AeroportDepart, b.Nom as AeroportArrivee
+, v.Avion from vols v, aeroports a , aeroports b 
+where v.AeroportDepart = a.ID_Aeroport
+and v.AeroportArrivee = b.ID_Aeroport
+); 

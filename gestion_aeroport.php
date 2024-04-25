@@ -1,7 +1,5 @@
-<h2> Gestion des aéroports </h2><br /><br />
-
 <?php
-
+echo '<h2> Gestion des aéroports </h2><br /><br />';
 // Vérification du rôle de l'utilisateur
 
 	$lAeroport = null;
@@ -33,9 +31,6 @@
     
     if(isset($_POST['Valider'])){
         $unControleur->insertAeroport($_POST);
-
-        
-        
     }
 
     
@@ -44,7 +39,10 @@
         header("Location: index.php?page=2");
     }
 
- 
+    if (isset($_POST['Annuler'])){
+        $lAeroport = null;
+        header("Location: index.php?page=2");
+    }
 
 // Filtrage des aéroports
 if(isset($_POST['Filtrer'])){
@@ -60,7 +58,4 @@ echo "<br> Nombre d'aéroports : ".$nb;
 
 // Inclusion de la vue pour afficher la liste des aéroports
 require_once("vue/vue_select_aeroports.php");
-
-// Affichage des détails de l'aéroport si disponible
-
 ?>
