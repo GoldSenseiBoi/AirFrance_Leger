@@ -6,8 +6,8 @@
 $lReservation = null;
 $lesPassagers= $unControleur->selectAllPassagers ();
 $lesVols= $unControleur->selectAllVols ();
-if(isset($_GET['action']) && isset($_GET['idReservation'])){
-    $idReservation = $_GET['idReservation']; 
+if(isset($_GET['action']) && isset($_GET['idreservation'])){
+    $idReservation = $_GET['idreservation']; 
     $action = $_GET['action']; 
 
     switch ($action){

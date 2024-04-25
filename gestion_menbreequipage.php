@@ -4,8 +4,8 @@
 
 // Vérification des actions sur les membres d'équipage
 $lMembre = null;
-if(isset($_GET['action']) && isset($_GET['ID_MembreEquipage'])){
-    $idMembreEquipage = $_GET['ID_MembreEquipage']; 
+if(isset($_GET['action']) && isset($_GET['idmembreequipage'])){
+    $idMembreEquipage = $_GET['idmembreequipage']; 
     $action = $_GET['action']; 
 
     switch ($action){
