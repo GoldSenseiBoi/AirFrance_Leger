@@ -63,7 +63,7 @@
 			echo "<div class='container'>
 				<div class='row'>
 					<div class='col-md-9 offset-md-2 text-center'>
-					<img src='image/airfr.jpg' height='200' width='400'>
+					
 						<h1>Bienvenue sur le portail de gestion Air France</h1>
 						<p class='lead'>Bonjour ". $_SESSION['prenom'] . " accéder aux fonctionnalités de gestion des vols, des passagers, des aéroports et plus encore.</p>
 					</div>

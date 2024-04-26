@@ -25,7 +25,7 @@
             echo "<td>";
             echo "<a href='index.php?page=5&action=sup&idreservation=".$uneReservation['ID_Reservation']."'><img src='image/supprimer.png' height='30' width='30'></a>";
             echo "<a href='index.php?page=5&action=edit&idreservation=".$uneReservation['ID_Reservation']."'><img src='image/editer.png' height='30' width='30'></a>";
-            echo "<a href='index.php?page=5&action=voir&idreservation=".$uneReservation['ID_Reservation']."'><img src='image/voire.png' height='30' width='30'></a>";
+            
             echo "</td>";
             echo "</tr>";
         }

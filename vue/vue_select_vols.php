@@ -33,7 +33,7 @@
             echo "<td>";
             echo "<a href='index.php?page=4&action=sup&idvol=".$unVol['ID_Vol']."'><img src='image/supprimer.png' height='30' width='30'></a>";
             echo "<a href='index.php?page=4&action=edit&idvol=".$unVol['ID_Vol']."'><img src='image/editer.png' height='30' width='30'></a>";
-            echo "<a href='index.php?page=4&action=voir&idvol=".$unVol['ID_Vol']."'><img src='image/voire.png' height='30' width='30'></a>";
+            
             echo "</td>";
             echo "</tr>";
         }
