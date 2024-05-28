@@ -4,7 +4,6 @@ if (!isset($leVol)) {
     $leVol = null;
 }
 ?>
-
 <h3>Ajout/Modification d'un vol</h3>
 <form method="post">
     <table>

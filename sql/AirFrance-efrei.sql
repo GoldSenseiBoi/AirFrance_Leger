@@ -321,9 +321,11 @@ COMMIT;
 -- Structure de la vue `vue_vols`
 --
 
-create view vue_vols as (
-select v.ID_Vol, v.NumeroVol,  v.DateDepart, v.DateArrivee, v.HeureDepart, v.HeureArrivee, a.Nom as AeroportDepart, b.Nom as AeroportArrivee
-, v.Avion from vols v, aeroports a , aeroports b 
-where v.AeroportDepart = a.ID_Aeroport
-and v.AeroportArrivee = b.ID_Aeroport
-); 
+CREATE OR REPLACE VIEW vue_vols AS
+SELECT v.ID_Vol, v.NumeroVol, v.DateDepart, v.DateArrivee, v.HeureDepart, v.HeureArrivee, 
+       a.Nom AS AeroportDepart, b.Nom AS AeroportArrivee, 
+       av.Modele AS Avion
+FROM vols v
+JOIN aeroports a ON v.AeroportDepart = a.ID_Aeroport
+JOIN aeroports b ON v.AeroportArrivee = b.ID_Aeroport
+JOIN avions av ON v.Avion = av.ID_Avion;
