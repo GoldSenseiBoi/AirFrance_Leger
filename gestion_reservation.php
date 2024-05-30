@@ -34,7 +34,10 @@ if(isset($_POST['Valider'])){
 // Mise à jour d'une réservation
 if (isset($_POST['Modifier'])){
     $unControleur->updateReservation($_POST); 
-    header("Location: index.php?page=5");
+    echo '
+    <script language="javascript">
+     window.location.href="index.php?page=5" ;
+     </script>'; 
 }
 
 if (isset($_POST['Annuler'])){

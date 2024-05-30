@@ -32,7 +32,10 @@ if(isset($_POST['Valider'])){
 // Mise à jour d'un membre d'équipage
 if (isset($_POST['Modifier'])){
     $unControleur->updateMembreEquipage($_POST); 
-    header("Location: index.php?page=7");
+    echo '
+    <script language="javascript">
+     window.location.href="index.php?page=7" ;
+     </script>'; 
 }
 
 if (isset($_POST['Annuler'])){

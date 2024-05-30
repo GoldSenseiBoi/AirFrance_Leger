@@ -48,7 +48,10 @@ if (isset($_POST['Valider'])) {
 // Mise à jour d'un vol
 if (isset($_POST['Modifier'])) {
     $controleur->updateVol($_POST);
-    header("Location: index.php?page=4");
+    echo '
+    <script language="javascript">
+     window.location.href="index.php?page=4" ;
+     </script>'; 
     exit();
 }
 

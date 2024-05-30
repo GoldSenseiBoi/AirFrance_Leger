@@ -329,3 +329,8 @@ FROM vols v
 JOIN aeroports a ON v.AeroportDepart = a.ID_Aeroport
 JOIN aeroports b ON v.AeroportArrivee = b.ID_Aeroport
 JOIN avions av ON v.Avion = av.ID_Avion;
+
+CREATE OR REPLACE VIEW vue_passagers AS
+SELECT p.ID_Passager, pers.Nom, pers.Prenom, pers.Email, pers.Telephone, pass.NumPasseport
+FROM passagers pass
+JOIN personne pers ON pass.ID_Personne = pers.ID_Personne;

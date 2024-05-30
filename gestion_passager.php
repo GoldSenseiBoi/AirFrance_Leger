@@ -4,8 +4,8 @@
 
 // Vérification des actions sur les passagers
 $lePassager = null;
-if(isset($_GET['action']) && isset($_GET['idPassager'])){
-    $idPassager = $_GET['idPassager']; 
+if(isset($_GET['action']) && isset($_GET['idpassager'])){
+    $idPassager = $_GET['idpassager']; 
     $action = $_GET['action']; 
 
     switch ($action){
@@ -15,9 +15,6 @@ if(isset($_GET['action']) && isset($_GET['idPassager'])){
         case "edit" : 
             $lePassager = $unControleur->selectWherePassager($idPassager);  
             break;
-        case "voir" :
-            $detailsPassager = $unControleur->selectWherePassager($idPassager);
-            break;  
     }
 }
 
@@ -32,7 +29,10 @@ if(isset($_POST['Valider'])){
 // Mise à jour d'un passager
 if (isset($_POST['Modifier'])){
     $unControleur->updatePassager($_POST); 
-    header("Location: index.php?page=6");
+    echo '
+    <script language="javascript">
+     window.location.href="index.php?page=6" ;
+     </script>'; 
 }
 
 if (isset($_POST['Annuler'])){

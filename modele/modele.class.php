@@ -12,55 +12,123 @@
 				echo "Erreur de connexion: ".$exp->getMessage();
 			}
 		}
-		public function insertPassagers($tab){
-			$requete = "INSERT INTO passagers (ID_Personne, NumPasseport) VALUES (:idPersonne, :numPasseport)";
-			$donnees = array(
-				":idPersonne" => $tab['ID_Personne'],
-				":numPasseport" => $tab['NumPasseport']
-			);
-			$insert = $this->unPDO->prepare($requete);
-			$insert->execute($donnees);
+		public function insertPassagers($tab) {
+			if ($this->unPDO != null) {
+				try {
+					$this->unPDO->beginTransaction();
+	
+					// Insertion dans la table personne
+					$requetePersonne = "INSERT INTO personne (Nom, Prenom, Email, Telephone) VALUES (:Nom, :Prenom, :Email, :Telephone)";
+					$insertPersonne = $this->unPDO->prepare($requetePersonne);
+					$insertPersonne->execute(array(
+						":Nom" => $tab['Nom'],
+						":Prenom" => $tab['Prenom'],
+						":Email" => $tab['Email'],
+						":Telephone" => $tab['Telephone']
+					));
+	
+					$idPersonne = $this->unPDO->lastInsertId();
+	
+					// Insertion dans la table passagers
+					$requetePassager = "INSERT INTO passagers (ID_Personne, NumPasseport) VALUES (:ID_Personne, :NumPasseport)";
+					$insertPassager = $this->unPDO->prepare($requetePassager);
+					$insertPassager->execute(array(
+						":ID_Personne" => $idPersonne,
+						":NumPasseport" => $tab['NumPasseport']
+					));
+	
+					$this->unPDO->commit();
+				} catch (PDOException $e) {
+					$this->unPDO->rollBack();
+					echo "Erreur : " . $e->getMessage();
+				}
+			}
 		}
 	
 		public function selectAllPassagers(){
-			$requete = "SELECT * FROM passagers";
+			$requete = "SELECT * FROM vue_passagers";
 			$select = $this->unPDO->prepare($requete);
 			$select->execute();
 			return $select->fetchAll();
 		}
 	
 		public function selectLikePassager($filtre){
-			$requete = "SELECT * FROM passagers WHERE NumPasseport LIKE :filtre";
+			$requete = "SELECT * FROM vue_passagers WHERE NumPasseport LIKE :filtre";
 			$donnees = array(":filtre" => "%".$filtre."%");
 			$select = $this->unPDO->prepare($requete);
 			$select->execute($donnees);
 			return $select->fetchAll();
 		}
 	
-		public function deletePassager($idPassager){
-			$requete = "DELETE FROM passagers WHERE ID_Passager = :idPassager";
-			$donnees = array(":idPassager" => $idPassager);
-			$delete = $this->unPDO->prepare($requete);
-			$delete->execute($donnees);
+		public function deletePassager($idPassager) {
+			if ($this->unPDO != null) {
+				try {
+					$this->unPDO->beginTransaction();
+	
+					// Suppression dans la table passagers
+					$requetePassager = "DELETE FROM passagers WHERE ID_Passager = :ID_Passager";
+					$deletePassager = $this->unPDO->prepare($requetePassager);
+					$deletePassager->execute(array(":ID_Passager" => $idPassager));
+	
+					// Suppression dans la table personne
+					$requetePersonne = "DELETE FROM personne WHERE ID_Personne = (SELECT ID_Personne FROM passagers WHERE ID_Passager = :ID_Passager)";
+					$deletePersonne = $this->unPDO->prepare($requetePersonne);
+					$deletePersonne->execute(array(":ID_Passager" => $idPassager));
+	
+					$this->unPDO->commit();
+				} catch (PDOException $e) {
+					$this->unPDO->rollBack();
+					echo "Erreur : " . $e->getMessage();
+				}
+			}
 		}
 	
-		public function selectWherePassager($idPassager){
-			$requete = "SELECT * FROM passagers WHERE ID_Passager = :idPassager";
-			$donnees = array(":idPassager" => $idPassager);
-			$select = $this->unPDO->prepare($requete);
-			$select->execute($donnees);
-			return $select->fetch();
-		}
 	
-		public function updatePassager($tab){
-			$requete = "UPDATE passagers SET ID_Personne = :idPersonne, NumPasseport = :numPasseport WHERE ID_Passager = :idPassager";
-			$donnees = array(
-				":idPassager" => $tab['ID_Passager'],
-				":idPersonne" => $tab['ID_Personne'],
-				":numPasseport" => $tab['NumPasseport']
-			);
-			$update = $this->unPDO->prepare($requete);
-			$update->execute($donnees);
+	public function selectWherePassager($idPassager){
+        try {
+            $requete = "SELECT * FROM vue_passagers WHERE ID_Passager = :idPassager";
+            $donnees = array(":idPassager" => $idPassager);
+            $select = $this->unPDO->prepare($requete);
+            $select->execute($donnees);
+            return $select->fetch();
+        } catch (PDOException $e) {
+            // Log l'erreur plutôt que de l'afficher à l'écran
+            error_log("Erreur : " . $e->getMessage());
+            // Rediriger ou afficher un message d'erreur convivial pour l'utilisateur
+            die("Une erreur est survenue lors de la récupération des données.");
+        }
+    }
+	
+		public function updatePassager($tab) {
+			if ($this->unPDO != null) {
+				try {
+					$this->unPDO->beginTransaction();
+	
+					// Mise à jour dans la table personne
+					$requetePersonne = "UPDATE personne SET Nom = :Nom, Prenom = :Prenom, Email = :Email, Telephone = :Telephone WHERE ID_Personne = (SELECT ID_Personne FROM passagers WHERE ID_Passager = :ID_Passager)";
+					$updatePersonne = $this->unPDO->prepare($requetePersonne);
+					$updatePersonne->execute(array(
+						":Nom" => $tab['Nom'],
+						":Prenom" => $tab['Prenom'],
+						":Email" => $tab['Email'],
+						":Telephone" => $tab['Telephone'],
+						":ID_Passager" => $tab['ID_Passager']
+					));
+	
+					// Mise à jour dans la table passagers
+					$requetePassager = "UPDATE passagers SET NumPasseport = :NumPasseport WHERE ID_Passager = :ID_Passager";
+					$updatePassager = $this->unPDO->prepare($requetePassager);
+					$updatePassager->execute(array(
+						":NumPasseport" => $tab['NumPasseport'],
+						":ID_Passager" => $tab['ID_Passager']
+					));
+	
+					$this->unPDO->commit();
+				} catch (PDOException $e) {
+					$this->unPDO->rollBack();
+					echo "Erreur : " . $e->getMessage();
+				}
+			}
 		}
 		public function insertAeroport($tab){
 			$requete = "INSERT INTO aeroports (Nom, Localisation) VALUES (:nom, :localisation)";

@@ -51,7 +51,7 @@
 			if ($unUser !=null){
 				$_SESSION['prenom'] = $unUser['Prenom'];
 				$_SESSION['email'] = $unUser['Email'];
-				//header("Location: index.php?page=1");
+				header("Location: index.php?page=1");
 
 			} else {
 				echo "<br>Votre identifiant ou mot de passe est incorrect";

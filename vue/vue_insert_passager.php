@@ -1,17 +1,31 @@
+<?php
+// Initialisation de $lePassager à null si elle n'est pas définie
+if (!isset($lePassager)) {
+    $lePassager = null;
+}
+?>
 
 <h3>Ajout/Modification d'un passager</h3>
 <form method="post">
     <table>
         <tr>
-            <td>ID Passager</td>
-            <td><input type="text" name="ID_Passager" value="<?= ($lePassager != null) ? $lePassager['ID_Passager'] : '' ?>"></td>
+            <td>Nom</td>
+            <td><input type="text" name="Nom" value="<?= ($lePassager != null) ? $lePassager['Nom'] : '' ?>"></td>
         </tr>
         <tr>
-            <td>ID Personne</td>
-            <td><input type="text" name="ID_Personne" value="<?= ($lePassager != null) ? $lePassager['ID_Personne'] : '' ?>"></td>
+            <td>Prénom</td>
+            <td><input type="text" name="Prenom" value="<?= ($lePassager != null) ? $lePassager['Prenom'] : '' ?>"></td>
         </tr>
         <tr>
-            <td>Numéro de passeport</td>
+            <td>Email</td>
+            <td><input type="email" name="Email" value="<?= ($lePassager != null) ? $lePassager['Email'] : '' ?>"></td>
+        </tr>
+        <tr>
+            <td>Téléphone</td>
+            <td><input type="text" name="Telephone" value="<?= ($lePassager != null) ? $lePassager['Telephone'] : '' ?>"></td>
+        </tr>
+        <tr>
+            <td>Numéro de Passeport</td>
             <td><input type="text" name="NumPasseport" value="<?= ($lePassager != null) ? $lePassager['NumPasseport'] : '' ?>"></td>
         </tr>
         <tr>

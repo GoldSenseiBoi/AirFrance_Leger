@@ -11,6 +11,9 @@
 		public function insertPassagers ($tab){
 			$this->unModele->insertPassagers ($tab);
 		}
+		public function updatePassager($tab){
+			$this->unModele->updatePassager($tab);
+		}
 		public function selectAllPassagers (){
 			return $this->unModele->selectAllPassagers();
 		}

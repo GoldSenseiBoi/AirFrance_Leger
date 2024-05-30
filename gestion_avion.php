@@ -32,7 +32,11 @@ if(isset($_POST['Valider'])){
 
 if (isset($_POST['Modifier'])){
     $unControleur->updateAvion($_POST); 
-    header("Location: index.php?page=3");
+    echo '
+    <script language="javascript">
+     window.location.href="index.php?page=3" ;
+     </script>'; 
+    
 }
 
 if (isset($_POST['Annuler'])){

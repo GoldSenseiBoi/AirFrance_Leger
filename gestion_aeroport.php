@@ -36,7 +36,11 @@ echo '<h2> Gestion des aéroports </h2><br /><br />';
     
     if (isset($_POST['Modifier'])){
         $unControleur->updateAeroport($_POST); 
-        header("Location: index.php?page=2");
+       // header("Location: index.php?page=2");
+       echo '
+       <script language="javascript">
+        window.location.href="index.php?page=2" ;
+        </script>'; 
     }
 
     if (isset($_POST['Annuler'])){
