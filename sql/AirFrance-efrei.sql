@@ -1,29 +1,54 @@
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
-SET time_zone = "+00:00";
 
-CREATE TABLE `admin` (
-  `ID_Admin` int(11) NOT NULL,
-  `Prenom` varchar(255) DEFAULT NULL,
-  `Email` varchar(255) DEFAULT NULL,
-  `MotDePasse` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+--
+-- Base de données : `airfrance`
+--
+
+-- --------------------------------------------------------
+CREATE DATABASE airfrance;
+use airfrance
+--
+-- Structure de la table `admin`
+--
+
+DROP TABLE IF EXISTS `admin`;
+CREATE TABLE IF NOT EXISTS `admin` (
+  `ID_Admin` int NOT NULL AUTO_INCREMENT,
+  `Prenom` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `Email` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `MotDePasse` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  PRIMARY KEY (`ID_Admin`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `admin`
+--
 
 INSERT INTO `admin` (`ID_Admin`, `Prenom`, `Email`, `MotDePasse`) VALUES
 (1, 'Arnaud', 'a@gmail.com', '123');
 
-CREATE TABLE `aeroports` (
-  `ID_Aeroport` int(11) NOT NULL,
-  `Nom` varchar(255) DEFAULT NULL,
-  `Localisation` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `aeroports`
+--
+
+DROP TABLE IF EXISTS `aeroports`;
+CREATE TABLE IF NOT EXISTS `aeroports` (
+  `ID_Aeroport` int NOT NULL AUTO_INCREMENT,
+  `Nom` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `Localisation` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  PRIMARY KEY (`ID_Aeroport`)
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `aeroports`
+--
 
 INSERT INTO `aeroports` (`ID_Aeroport`, `Nom`, `Localisation`) VALUES
-(1, 'Aéroport de Paris-Charles de Gaulle (CDG)', 'FRANCE'),
+(1, 'Aéroport de Paris-Charles de Gaulle (CDG)', 'FRANCE '),
 (2, 'Aéroport de Paris-Orly (ORY)', 'FRANCE'),
 (3, 'Aéroport de Lyon-Saint Exupéry (LYS)', 'FRANCE'),
-(4, 'Aéroport de Nice-Côte dAzur (NCE)', 'FRANCE'),
-(5, 'Aéroport de Toulouse-Blagnac (TLS)', 'FRANCE'),
+(4, 'Aéroport de Nice-Côte dAzur (NCE)', 'FRANCE2'),
 (6, 'Aéroport de Marseille-Provence (MRS)', 'FRANCE'),
 (7, 'Aéroport de Bordeaux-Mérignac (BOD)', 'FRANCE'),
 (8, 'Aéroport de Nantes Atlantique (NTE)', 'FRANCE'),
@@ -33,57 +58,85 @@ INSERT INTO `aeroports` (`ID_Aeroport`, `Nom`, `Localisation`) VALUES
 (12, 'Aéroport de New York-JFK (JFK)', 'États-Unis'),
 (13, 'Aéroport de Los Angeles International (LAX)', 'États-Unis'),
 (14, 'Aéroport de Londres-Heathrow (LHR)', 'Royaume-Uni'),
-(15, 'Aéroport de Tokyo-Narita (NRT)', 'Japon');
+(15, 'Aéroport de Tokyo-Narita (NRT)', 'Japonn');
 
-CREATE TABLE `avions` (
-  `ID_Avion` int(11) NOT NULL,
-  `Modele` varchar(255) DEFAULT NULL,
-  `NombrePlaces` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `avions`
+--
+
+DROP TABLE IF EXISTS `avions`;
+CREATE TABLE IF NOT EXISTS `avions` (
+  `ID_Avion` int NOT NULL AUTO_INCREMENT,
+  `Modele` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `NombrePlaces` int DEFAULT NULL,
+  PRIMARY KEY (`ID_Avion`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `avions`
+--
 
 INSERT INTO `avions` (`ID_Avion`, `Modele`, `NombrePlaces`) VALUES
 (1, 'Airbus A380-1000 \"SkyGiant\"', 600),
-(2, 'Boeing 797 \"DreamBird\"', 550),
+(2, 'Boeing 797 ', 5500),
 (3, 'Embraer E999 \"SkyCruiser\"', 200),
 (4, 'Bombardier B1000 \"StarJet\"', 300),
 (5, 'Cessna C888 \"SkyHawk\"', 10),
 (6, 'Gulfstream G7000 \"StarLux\"', 20),
-(7, 'Airbus A550 \"SkyWing\"', 400),
 (8, 'Boeing 899X \"SuperEagle\"', 500),
-(9, 'Lockheed Martin L1000 \"SkyMaster\"', 450),
-(10, 'Bombardier BD1000 \"DreamStar\"', 350);
+(10, 'Bombardier BD1000 \"DreamStar\"', 350),
+(11, 'airbus 330', 340);
 
-CREATE TABLE `membresequipage` (
-  `ID_MembreEquipage` int(11) NOT NULL,
-  `ID_Personne` int(11) DEFAULT NULL,
-  `Role` varchar(255) DEFAULT NULL,
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `membresequipage`
+--
+
+DROP TABLE IF EXISTS `membresequipage`;
+CREATE TABLE IF NOT EXISTS `membresequipage` (
+  `ID_MembreEquipage` int NOT NULL AUTO_INCREMENT,
+  `ID_Personne` int DEFAULT NULL,
+  `Role` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `DateEmbauche` date DEFAULT NULL,
-  `ID_Vol` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `ID_Vol` int DEFAULT NULL,
+  PRIMARY KEY (`ID_MembreEquipage`),
+  KEY `ID_Personne` (`ID_Personne`),
+  KEY `fk_id_vol` (`ID_Vol`)
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `membresequipage`
+--
 
 INSERT INTO `membresequipage` (`ID_MembreEquipage`, `ID_Personne`, `Role`, `DateEmbauche`, `ID_Vol`) VALUES
 (6, 11, 'Pilote', '2023-01-15', 2),
 (7, 12, 'Copilote', '2023-01-20', 2),
-(8, 13, 'Hôtesse de lair', '2023-02-10', 2),
+(8, 13, 'Pilote', '2003-02-10', 2),
 (9, 14, 'Steward', '2023-02-10', 2),
-(10, 15, 'Steward', '2023-03-05', 2);
+(10, 15, 'Steward', '2023-03-05', 2),
+(12, 1, 'Copilote', '1985-12-25', 2);
 
-CREATE TABLE `paiements` (
-  `ID_Paiement` int(11) NOT NULL,
-  `ID_Reservation` int(11) DEFAULT NULL,
-  `MontantPaye` int(11) DEFAULT NULL,
-  `DatePaiement` date DEFAULT NULL,
-  `StatutPaiement` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+-- --------------------------------------------------------
 
-INSERT INTO `paiements` (`ID_Paiement`, `ID_Reservation`, `MontantPaye`, `DatePaiement`, `StatutPaiement`) VALUES
-(1, 7, 45, '2023-01-15', 'Payé');
+--
+-- Structure de la table `passagers`
+--
 
-CREATE TABLE `passagers` (
-  `ID_Passager` int(11) NOT NULL,
-  `ID_Personne` int(11) DEFAULT NULL,
-  `NumPasseport` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+DROP TABLE IF EXISTS `passagers`;
+CREATE TABLE IF NOT EXISTS `passagers` (
+  `ID_Passager` int NOT NULL AUTO_INCREMENT,
+  `ID_Personne` int DEFAULT NULL,
+  `NumPasseport` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  PRIMARY KEY (`ID_Passager`),
+  KEY `ID_Personne` (`ID_Personne`)
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `passagers`
+--
 
 INSERT INTO `passagers` (`ID_Passager`, `ID_Personne`, `NumPasseport`) VALUES
 (1, 1, 'AB123456'),
@@ -104,31 +157,46 @@ INSERT INTO `passagers` (`ID_Passager`, `ID_Personne`, `NumPasseport`) VALUES
 (18, 37, 'AZ123456'),
 (19, 38, 'KZ120987'),
 (20, 39, 'HG123456'),
-(21, 40, 'G2R23342'),
-(22, 41, 'G2R35342'),
-(23, 42, 'AA623456'),
-(24, 43, 'AB127367'),
-(25, 44, 'AA623456'),
-(26, 45, 'AQ987654'),
-(27, 46, 'FG352378'),
-(28, 47, 'AZ623456'),
-(29, 48, 'KZ220987'),
-(30, 49, 'AG123456');
+(21, 40, 'G2R23323'),
+(22, 41, 'KQ543625'),
+(23, 42, 'AQ12345'),
+(24, 43, 'WQ567890'),
+(25, 44, 'AQ678901'),
+(26, 45, 'FFA55'),
+(27, 46, 'AG5788788'),
+(28, 47, 'AQ12443'),
+(29, 48, 'AS876543'),
+(30, 49, 'AYFF7676'),
+(31, 50, 'zezerzerze'),
+(32, 51, 'AQ123456'),
+(33, 52, 'AZ123456');
 
-CREATE TABLE `personne` (
-  `ID_Personne` int(11) NOT NULL,
-  `Nom` varchar(255) DEFAULT NULL,
-  `Prenom` varchar(255) DEFAULT NULL,
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `personne`
+--
+
+DROP TABLE IF EXISTS `personne`;
+CREATE TABLE IF NOT EXISTS `personne` (
+  `ID_Personne` int NOT NULL AUTO_INCREMENT,
+  `Nom` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `Prenom` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `DateNaissance` date DEFAULT NULL,
-  `adresse` varchar(255) DEFAULT NULL,
-  `email` varchar(255) DEFAULT NULL,
-  `telephone` varchar(16) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `adresse` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `email` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `telephone` varchar(16) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  PRIMARY KEY (`ID_Personne`)
+) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `personne`
+--
 
 INSERT INTO `personne` (`ID_Personne`, `Nom`, `Prenom`, `DateNaissance`, `adresse`, `email`, `telephone`) VALUES
 (1, 'Dupont', 'Jean', '1990-01-01', '123 Rue Example, Ville, Pays', 'jean.dupont@example.com', '0612345678'),
 (4, 'Leroy', 'Isabelle', '1978-03-20', '321 Rue Demo, Ville, Pays', 'isabelle.leroy@example.com', '0612345680'),
-(5, 'Roux', 'Antoine', '1989-11-05', '654 Avenue Exemple, Ville, Pays', 'antoine.roux@example.com', '0712345681'),
+(5, 'Roux', 'Antoine', '1989-11-05', '654 Avenue Exemple, Ville, Pays', 'antoine.roux@example.com', '071234568'),
 (6, 'Fournier', 'Marie', '1983-07-12', '987 Boulevard Test, Ville, Pays', 'marie.fournier@example.com', '0612345682'),
 (7, 'Moreau', 'Thomas', '1980-09-18', '741 Rue Échantillon, Ville, Pays', 'thomas.moreau@example.com', '0712345683'),
 (8, 'Girard', 'Laura', '1975-12-25', '159 Avenue Démo, Ville, Pays', 'laura.girard@example.com', '0612345684'),
@@ -175,152 +243,159 @@ INSERT INTO `personne` (`ID_Personne`, `Nom`, `Prenom`, `DateNaissance`, `adress
 (49, 'dsqdsq', 'suddd', '1990-01-01', 'ssdsdsq', 'sqdsqdsq', '9070700'),
 (50, 'zdfsdf', 'sdfsdf', '1990-01-01', 'ezerezrze', 'rzerzer', 'erzerzerze'),
 (51, 'zdfsdf', 'sdfsdf', '1990-01-01', '12 rue de', 'a@gmail.com', '0675767577'),
-(52, 'zeze', 'zaezae', '1990-01-01', '12 rue des cocotiers', 'A@gmail.com', '0615267823');
+(52, 'zeze', 'zaezae', '1990-01-01', '12 rue des cocotiers', 'A@gmail.com', '0615267823'),
+(53, '', '', NULL, NULL, '', '');
 
-CREATE TABLE `reservations` (
-  `ID_Reservation` int(11) NOT NULL,
-  `ID_Passager` int(11) DEFAULT NULL,
-  `ID_Vol` int(11) DEFAULT NULL,
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `reservations`
+--
+
+DROP TABLE IF EXISTS `reservations`;
+CREATE TABLE IF NOT EXISTS `reservations` (
+  `ID_Reservation` int NOT NULL AUTO_INCREMENT,
+  `ID_Passager` int DEFAULT NULL,
+  `ID_Vol` int DEFAULT NULL,
   `DateReservation` date DEFAULT NULL,
-  `SiegeAttribue` varchar(10) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `SiegeAttribue` varchar(10) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  PRIMARY KEY (`ID_Reservation`),
+  KEY `ID_Passager` (`ID_Passager`),
+  KEY `ID_Vol` (`ID_Vol`)
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Déchargement des données de la table `reservations`
+--
 
 INSERT INTO `reservations` (`ID_Reservation`, `ID_Passager`, `ID_Vol`, `DateReservation`, `SiegeAttribue`) VALUES
 (7, 1, 2, '2024-03-07', 'A1'),
 (10, 10, 3, '2024-03-05', 'K3'),
 (11, 17, 4, '2024-03-07', 'J6');
 
+-- --------------------------------------------------------
 
-CREATE TABLE `vols` (
-  `ID_Vol` int(11) NOT NULL,
-  `DateDepart` datetime DEFAULT NULL,
-  `DateArrivee` datetime DEFAULT NULL,
-  `ID_AeroportDepart` int(11) DEFAULT NULL,
-  `ID_AeroportArrivee` int(11) DEFAULT NULL,
-  `ID_Avion` int(11) DEFAULT NULL,
-  `Statut` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+--
+-- Structure de la table `vols`
+--
 
-INSERT INTO `vols` (`ID_Vol`, `DateDepart`, `DateArrivee`, `ID_AeroportDepart`, `ID_AeroportArrivee`, `ID_Avion`, `Statut`) VALUES
-(1, '2023-01-01 08:00:00', '2023-01-01 10:30:00', 1, 2, 1, 'Programmé'),
-(2, '2023-01-01 13:00:00', '2023-01-01 15:30:00', 2, 1, 2, 'Programmé'),
-(3, '2023-01-02 08:00:00', '2023-01-02 10:30:00', 3, 4, 3, 'Programmé'),
-(4, '2023-01-02 13:00:00', '2023-01-02 15:30:00', 4, 3, 4, 'Programmé'),
-(5, '2023-01-03 08:00:00', '2023-01-03 10:30:00', 5, 6, 5, 'Programmé'),
-(6, '2023-01-03 13:00:00', '2023-01-03 15:30:00', 6, 5, 6, 'Programmé'),
-(7, '2023-01-04 08:00:00', '2023-01-04 10:30:00', 7, 8, 7, 'Programmé'),
-(8, '2023-01-04 13:00:00', '2023-01-04 15:30:00', 8, 7, 8, 'Programmé'),
-(9, '2023-01-05 08:00:00', '2023-01-05 10:30:00', 9, 10, 9, 'Programmé'),
-(10, '2023-01-05 13:00:00', '2023-01-05 15:30:00', 10, 9, 10, 'Programmé');
+DROP TABLE IF EXISTS `vols`;
+CREATE TABLE IF NOT EXISTS `vols` (
+  `ID_Vol` int NOT NULL AUTO_INCREMENT,
+  `NumeroVol` varchar(10) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `DateDepart` date DEFAULT NULL,
+  `HeureDepart` time DEFAULT NULL,
+  `AeroportDepart` int DEFAULT NULL,
+  `DateArrivee` date DEFAULT NULL,
+  `HeureArrivee` time DEFAULT NULL,
+  `AeroportArrivee` int DEFAULT NULL,
+  `Avion` int DEFAULT NULL,
+  PRIMARY KEY (`ID_Vol`),
+  KEY `AeroportDepart` (`AeroportDepart`),
+  KEY `AeroportArrivee` (`AeroportArrivee`),
+  KEY `Avion` (`Avion`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-ALTER TABLE `admin`
-  ADD PRIMARY KEY (`ID_Admin`);
+--
+-- Déchargement des données de la table `vols`
+--
 
-ALTER TABLE `aeroports`
-  ADD PRIMARY KEY (`ID_Aeroport`);
+INSERT INTO `vols` (`ID_Vol`, `NumeroVol`, `DateDepart`, `HeureDepart`, `AeroportDepart`, `DateArrivee`, `HeureArrivee`, `AeroportArrivee`, `Avion`) VALUES
+(2, 'AF123', '2024-03-10', '08:00:00', 2, '2024-03-10', '10:00:00', 2, 1),
+(3, 'BA456', '2024-03-11', '09:00:00', 1, '2024-03-11', '11:00:00', 1, 11),
+(4, 'LH789', '2024-03-12', '10:00:00', 3, '2024-03-12', '12:00:00', 3, 3),
+(5, 'EK012', '2024-03-13', '11:00:00', 3, '2024-03-13', '13:00:00', 2, 4),
+(6, 'QR3452', '2024-03-15', '12:00:00', 2, '2024-03-14', '14:00:00', 3, 5);
 
+-- --------------------------------------------------------
 
-ALTER TABLE `avions`
-  ADD PRIMARY KEY (`ID_Avion`);
+--
+-- Doublure de structure pour la vue `vue_passagers`
+-- (Voir ci-dessous la vue réelle)
+--
+DROP VIEW IF EXISTS `vue_passagers`;
+CREATE TABLE IF NOT EXISTS `vue_passagers` (
+`ID_Passager` int
+,`Nom` varchar(255)
+,`Prenom` varchar(255)
+,`Email` varchar(255)
+,`Telephone` varchar(16)
+,`NumPasseport` varchar(255)
+);
 
+-- --------------------------------------------------------
 
-ALTER TABLE `membresequipage`
-  ADD PRIMARY KEY (`ID_MembreEquipage`),
-  ADD KEY `ID_Personne` (`ID_Personne`),
-  ADD KEY `fk_id_vol` (`ID_Vol`);
+--
+-- Doublure de structure pour la vue `vue_vols`
+-- (Voir ci-dessous la vue réelle)
+--
+DROP VIEW IF EXISTS `vue_vols`;
+CREATE TABLE IF NOT EXISTS `vue_vols` (
+`ID_Vol` int
+,`NumeroVol` varchar(10)
+,`DateDepart` date
+,`DateArrivee` date
+,`HeureDepart` time
+,`HeureArrivee` time
+,`AeroportDepart` varchar(255)
+,`AeroportArrivee` varchar(255)
+,`Avion` varchar(255)
+);
 
+-- --------------------------------------------------------
 
-ALTER TABLE `paiements`
-  ADD PRIMARY KEY (`ID_Paiement`),
-  ADD KEY `ID_Reservation` (`ID_Reservation`);
+--
+-- Structure de la vue `vue_passagers`
+--
+DROP TABLE IF EXISTS `vue_passagers`;
 
+DROP VIEW IF EXISTS `vue_passagers`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vue_passagers`  AS SELECT `p`.`ID_Passager` AS `ID_Passager`, `pers`.`Nom` AS `Nom`, `pers`.`Prenom` AS `Prenom`, `pers`.`email` AS `Email`, `pers`.`telephone` AS `Telephone`, `p`.`NumPasseport` AS `NumPasseport` FROM (`passagers` `p` join `personne` `pers` on((`p`.`ID_Personne` = `pers`.`ID_Personne`))) ;
 
-ALTER TABLE `passagers`
-  ADD PRIMARY KEY (`ID_Passager`),
-  ADD KEY `ID_Personne` (`ID_Personne`);
+-- --------------------------------------------------------
 
+--
+-- Structure de la vue `vue_vols`
+--
+DROP TABLE IF EXISTS `vue_vols`;
 
-ALTER TABLE `personne`
-  ADD PRIMARY KEY (`ID_Personne`);
+DROP VIEW IF EXISTS `vue_vols`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vue_vols`  AS SELECT `v`.`ID_Vol` AS `ID_Vol`, `v`.`NumeroVol` AS `NumeroVol`, `v`.`DateDepart` AS `DateDepart`, `v`.`DateArrivee` AS `DateArrivee`, `v`.`HeureDepart` AS `HeureDepart`, `v`.`HeureArrivee` AS `HeureArrivee`, `a`.`Nom` AS `AeroportDepart`, `b`.`Nom` AS `AeroportArrivee`, `av`.`Modele` AS `Avion` FROM (((`vols` `v` join `aeroports` `a` on((`v`.`AeroportDepart` = `a`.`ID_Aeroport`))) join `aeroports` `b` on((`v`.`AeroportArrivee` = `b`.`ID_Aeroport`))) join `avions` `av` on((`v`.`Avion` = `av`.`ID_Avion`))) ;
 
+--
+-- Contraintes pour les tables déchargées
+--
 
-ALTER TABLE `reservations`
-  ADD PRIMARY KEY (`ID_Reservation`),
-  ADD KEY `ID_Passager` (`ID_Passager`),
-  ADD KEY `ID_Vol` (`ID_Vol`);
-
-
-ALTER TABLE `vols`
-  ADD PRIMARY KEY (`ID_Vol`),
-  ADD KEY `AeroportDepart` (`AeroportDepart`),
-  ADD KEY `AeroportArrivee` (`AeroportArrivee`),
-  ADD KEY `Avion` (`Avion`);
-
-
-ALTER TABLE `admin`
-  MODIFY `ID_Admin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
-
-ALTER TABLE `aeroports`
-  MODIFY `ID_Aeroport` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
-
-
-ALTER TABLE `avions`
-  MODIFY `ID_Avion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-
-
-ALTER TABLE `membresequipage`
-  MODIFY `ID_MembreEquipage` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-
-
-ALTER TABLE `paiements`
-  MODIFY `ID_Paiement` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
-
-ALTER TABLE `passagers`
-  MODIFY `ID_Passager` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
-
-
-ALTER TABLE `personne`
-  MODIFY `ID_Personne` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
-
-
-ALTER TABLE `reservations`
-  MODIFY `ID_Reservation` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
-
-
-ALTER TABLE `vols`
-  MODIFY `ID_Vol` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
-
+--
+-- Contraintes pour la table `membresequipage`
+--
 ALTER TABLE `membresequipage`
   ADD CONSTRAINT `fk_id_vol` FOREIGN KEY (`ID_Vol`) REFERENCES `vols` (`ID_Vol`),
   ADD CONSTRAINT `membresequipage_ibfk_1` FOREIGN KEY (`ID_Personne`) REFERENCES `personne` (`ID_Personne`);
 
-
-ALTER TABLE `paiements`
-  ADD CONSTRAINT `paiements_ibfk_1` FOREIGN KEY (`ID_Reservation`) REFERENCES `reservations` (`ID_Reservation`);
-
-
+--
+-- Contraintes pour la table `passagers`
+--
 ALTER TABLE `passagers`
   ADD CONSTRAINT `passagers_ibfk_1` FOREIGN KEY (`ID_Personne`) REFERENCES `personne` (`ID_Personne`);
 
-
+--
+-- Contraintes pour la table `reservations`
+--
 ALTER TABLE `reservations`
   ADD CONSTRAINT `reservations_ibfk_1` FOREIGN KEY (`ID_Passager`) REFERENCES `passagers` (`ID_Passager`),
   ADD CONSTRAINT `reservations_ibfk_2` FOREIGN KEY (`ID_Vol`) REFERENCES `vols` (`ID_Vol`);
 
-
+--
+-- Contraintes pour la table `vols`
+--
 ALTER TABLE `vols`
   ADD CONSTRAINT `vols_ibfk_1` FOREIGN KEY (`AeroportDepart`) REFERENCES `aeroports` (`ID_Aeroport`),
   ADD CONSTRAINT `vols_ibfk_2` FOREIGN KEY (`AeroportArrivee`) REFERENCES `aeroports` (`ID_Aeroport`),
   ADD CONSTRAINT `vols_ibfk_3` FOREIGN KEY (`Avion`) REFERENCES `avions` (`ID_Avion`);
 COMMIT;
---
--- Structure de la vue `vue_vols`
---
 
+-- Autre vue creer
 CREATE OR REPLACE VIEW vue_vols AS
 SELECT v.ID_Vol, v.NumeroVol, v.DateDepart, v.DateArrivee, v.HeureDepart, v.HeureArrivee, 
        a.Nom AS AeroportDepart, b.Nom AS AeroportArrivee, 
@@ -331,6 +406,6 @@ JOIN aeroports b ON v.AeroportArrivee = b.ID_Aeroport
 JOIN avions av ON v.Avion = av.ID_Avion;
 
 CREATE OR REPLACE VIEW vue_passagers AS
-SELECT p.ID_Passager, pers.Nom, pers.Prenom, pers.Email, pers.Telephone, pass.NumPasseport
+SELECT pass.ID_Passager, pers.Nom, pers.Prenom, pers.Email, pers.Telephone, pass.NumPasseport
 FROM passagers pass
 JOIN personne pers ON pass.ID_Personne = pers.ID_Personne;

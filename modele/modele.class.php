@@ -243,7 +243,7 @@
 		}
 	
 		public function selectAllMembresEquipage(){
-			$requete = "SELECT * FROM membresequipage";
+			$requete = "SELECT me.ID_MembreEquipage, me.ID_Personne, p.Nom, p.Prenom, me.Role, me.DateEmbauche, me.ID_Vol FROM membresequipage me JOIN personne p ON me.ID_Personne = p.ID_Personne";
 			$select = $this->unPDO->prepare($requete);
 			$select->execute();
 			return $select->fetchAll();
