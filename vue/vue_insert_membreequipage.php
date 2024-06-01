@@ -2,12 +2,16 @@
 <form method="post">
     <table>
         <tr>
-            <td>ID Membre d'équipage</td>
-            <td><input type="text" name="ID_MembreEquipage" value="<?= ($lMembre != null) ? $lMembre['ID_MembreEquipage'] : '' ?>"></td>
+            <td>Nom</td>
+            <td><input type="text" name="Nom" value="<?= ($lMembre != null) ? $lMembre['Nom'] : '' ?>"></td>
+        </tr>
+        <tr>
+            <td>Prénom</td>
+            <td><input type="text" name="Prenom" value="<?= ($lMembre != null) ? $lMembre['Prenom'] : '' ?>"></td>
         </tr>
         <tr>
             <td>ID Personne</td>
-            <td><input type="text" name="ID_Personne" value="<?= ($lMembre != null) ? $lMembre['ID_Personne'] : '' ?>"></td>
+            <td><input type="text" name="ID_Personne" value="<?= ($lMembre != null) ? $lMembre['ID_Personne'] : '' ?>" ></td>
         </tr>
         <tr>
             <td>Rôle</td>

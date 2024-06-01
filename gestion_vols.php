@@ -41,7 +41,10 @@ require_once "vue/vue_insert_vols.php";
 // Insertion d'un nouveau vol
 if (isset($_POST['Valider'])) {
     $controleur->insertVol($_POST);
-    header("Location: index.php?page=4");
+    echo '
+    <script language="javascript">
+     window.location.href="index.php?page=4" ;
+     </script>'; 
     exit();
 }
 
@@ -57,7 +60,10 @@ if (isset($_POST['Modifier'])) {
 
 // Annulation
 if (isset($_POST['Annuler'])) {
-    header("Location: index.php?page=4");
+    echo '
+    <script language="javascript">
+     window.location.href="index.php?page=4" ;
+     </script>'; 
     exit();
 }
 

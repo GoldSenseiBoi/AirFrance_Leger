@@ -198,7 +198,7 @@
 		}
 	
 		public function selectLikeAvion($filtre){
-			$requete = "SELECT * FROM avions WHERE Modele LIKE :filtre";
+			$requete = "SELECT * FROM avions WHERE Modele LIKE :filtre OR NombrePlaces LIKE :filtre";
 			$donnees = array(":filtre" => "%".$filtre."%");
 			$select = $this->unPDO->prepare($requete);
 			$select->execute($donnees);
@@ -230,7 +230,7 @@
 			$update = $this->unPDO->prepare($requete);
 			$update->execute($donnees);
 		}
-		public function insertMembresEquipage($tab){
+		public function insertMembresEquipage($tab) {
 			$requete = "INSERT INTO membresequipage (ID_Personne, Role, DateEmbauche, ID_Vol) VALUES (:idPersonne, :role, :dateEmbauche, :idVol)";
 			$donnees = array(
 				":idPersonne" => $tab['ID_Personne'],
@@ -240,6 +240,16 @@
 			);
 			$insert = $this->unPDO->prepare($requete);
 			$insert->execute($donnees);
+		
+			// Mise à jour des champs Nom et Prenom dans la table personne
+			$requetePersonne = "UPDATE personne SET Nom = :nom, Prenom = :prenom WHERE ID_Personne = :idPersonne";
+			$donneesPersonne = array(
+				":nom" => $tab['Nom'],
+				":prenom" => $tab['Prenom'],
+				":idPersonne" => $tab['ID_Personne']
+			);
+			$updatePersonne = $this->unPDO->prepare($requetePersonne);
+			$updatePersonne->execute($donneesPersonne);
 		}
 	
 		public function selectAllMembresEquipage(){
@@ -249,31 +259,38 @@
 			return $select->fetchAll();
 		}
 	
-		public function selectLikeMembresEquipage($filtre){
-			$requete = "SELECT * FROM membresequipage WHERE Role LIKE :filtre";
+		public function selectLikeMembresEquipage($filtre) {
+			$requete = "SELECT me.ID_MembreEquipage, me.ID_Personne, p.Nom, p.Prenom, me.Role, me.DateEmbauche, me.ID_Vol 
+						FROM membresequipage me 
+						JOIN personne p ON me.ID_Personne = p.ID_Personne
+						WHERE me.Role LIKE :filtre OR p.Nom LIKE :filtre OR p.Prenom LIKE :filtre OR me.ID_Vol LIKE :filtre";
 			$donnees = array(":filtre" => "%".$filtre."%");
 			$select = $this->unPDO->prepare($requete);
 			$select->execute($donnees);
 			return $select->fetchAll();
 		}
 	
-		public function deleteMembreEquipage($idMembreEquipage){
+		public function deleteMembreEquipage($idMembreEquipage) {
 			$requete = "DELETE FROM membresequipage WHERE ID_MembreEquipage = :idMembreEquipage";
 			$donnees = array(":idMembreEquipage" => $idMembreEquipage);
 			$delete = $this->unPDO->prepare($requete);
 			$delete->execute($donnees);
 		}
-	
-		public function selectWhereMembreEquipage($idMembreEquipage){
-			$requete = "SELECT * FROM membresequipage WHERE ID_MembreEquipage = :idMembreEquipage";
+		
+		public function selectWhereMembreEquipage($idMembreEquipage) {
+			$requete = "SELECT me.ID_MembreEquipage, me.ID_Personne, p.Nom, p.Prenom, me.Role, me.DateEmbauche, me.ID_Vol 
+						FROM membresequipage me 
+						JOIN personne p ON me.ID_Personne = p.ID_Personne
+						WHERE me.ID_MembreEquipage = :idMembreEquipage";
 			$donnees = array(":idMembreEquipage" => $idMembreEquipage);
 			$select = $this->unPDO->prepare($requete);
 			$select->execute($donnees);
 			return $select->fetch();
 		}
 	
-		public function updateMembreEquipage($tab){
-			$requete = "UPDATE membresequipage SET ID_Personne = :idPersonne, Role = :role, DateEmbauche = :dateEmbauche, ID_Vol = :idVol WHERE ID_MembreEquipage = :idMembreEquipage";
+		public function updateMembreEquipage($tab) {
+			$requete = "UPDATE membresequipage SET ID_Personne = :idPersonne, Role = :role, DateEmbauche = :dateEmbauche, ID_Vol = :idVol 
+						WHERE ID_MembreEquipage = :idMembreEquipage";
 			$donnees = array(
 				":idMembreEquipage" => $tab['ID_MembreEquipage'],
 				":idPersonne" => $tab['ID_Personne'],
@@ -283,7 +300,18 @@
 			);
 			$update = $this->unPDO->prepare($requete);
 			$update->execute($donnees);
+		
+			// Mise à jour des champs Nom et Prenom dans la table personne
+			$requetePersonne = "UPDATE personne SET Nom = :nom, Prenom = :prenom WHERE ID_Personne = :idPersonne";
+			$donneesPersonne = array(
+				":nom" => $tab['Nom'],
+				":prenom" => $tab['Prenom'],
+				":idPersonne" => $tab['ID_Personne']
+			);
+			$updatePersonne = $this->unPDO->prepare($requetePersonne);
+			$updatePersonne->execute($donneesPersonne);
 		}
+		
 		public function insertReservation($tab){
 			$requete = "INSERT INTO reservations (ID_Passager, ID_Vol, DateReservation, SiegeAttribue) VALUES (:idPassager, :idVol, :dateReservation, :siegeAttribue)";
 			$donnees = array(
@@ -362,7 +390,7 @@
 		}
 	
 		public function selectLikeVol($filtre){
-			$requete = "SELECT * FROM vue_vols WHERE NumeroVol LIKE :filtre";
+			$requete = "SELECT * FROM vue_vols WHERE NumeroVol LIKE :filtre OR AeroportDepart LIKE :filtre OR AeroportArrivee LIKE :filtre OR Avion LIKE :filtre";
 			$donnees = array(":filtre" => "%".$filtre."%");
 			$select = $this->unPDO->prepare($requete);
 			$select->execute($donnees);
