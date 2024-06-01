@@ -1,11 +1,8 @@
-
---
--- Base de données : `airfrance`
+ Base de données : `airfrance`
 --
 
 -- --------------------------------------------------------
-CREATE DATABASE airfrance;
-use airfrance
+
 --
 -- Structure de la table `admin`
 --
@@ -72,7 +69,7 @@ CREATE TABLE IF NOT EXISTS `avions` (
   `Modele` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `NombrePlaces` int DEFAULT NULL,
   PRIMARY KEY (`ID_Avion`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `avions`
@@ -87,7 +84,12 @@ INSERT INTO `avions` (`ID_Avion`, `Modele`, `NombrePlaces`) VALUES
 (6, 'Gulfstream G7000 \"StarLux\"', 20),
 (8, 'Boeing 899X \"SuperEagle\"', 500),
 (10, 'Bombardier BD1000 \"DreamStar\"', 350),
-(11, 'airbus 330', 340);
+(11, 'Airbus A330', 340),
+(13, 'Airbus A350-1000', 400),
+(14, 'Boeing 787 Dreamliner', 300),
+(15, 'Embraer E190', 150),
+(16, 'Bombardier CRJ900', 100),
+(17, 'Airbus A320', 200);
 
 -- --------------------------------------------------------
 
@@ -105,7 +107,7 @@ CREATE TABLE IF NOT EXISTS `membresequipage` (
   PRIMARY KEY (`ID_MembreEquipage`),
   KEY `ID_Personne` (`ID_Personne`),
   KEY `fk_id_vol` (`ID_Vol`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=58 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `membresequipage`
@@ -117,7 +119,19 @@ INSERT INTO `membresequipage` (`ID_MembreEquipage`, `ID_Personne`, `Role`, `Date
 (8, 13, 'Pilote', '2003-02-10', 2),
 (9, 14, 'Steward', '2023-02-10', 2),
 (10, 15, 'Steward', '2023-03-05', 2),
-(12, 1, 'Copilote', '1985-12-25', 2);
+(12, 1, 'Copilote', '1985-12-25', 2),
+(46, 6, 'Steward', '2023-03-05', 5),
+(47, 7, 'Pilote', '2023-01-15', 6),
+(48, 8, 'Copilote', '2023-01-20', 6),
+(49, 9, 'Pilote', '2003-02-10', 6),
+(50, 10, 'Steward', '2023-02-10', 6),
+(51, 11, 'Pilote', '2023-03-05', 6),
+(52, 12, 'Copilote', '1985-12-25', 6),
+(53, 13, 'Pilote', '2023-01-15', 7),
+(54, 14, 'Copilote', '2023-01-20', 7),
+(55, 15, 'Pilote', '2003-02-10', 7),
+(56, 16, 'Steward', '2023-02-10', 7),
+(57, 17, 'Steward', '2023-03-05', 7);
 
 -- --------------------------------------------------------
 
@@ -262,7 +276,7 @@ CREATE TABLE IF NOT EXISTS `reservations` (
   PRIMARY KEY (`ID_Reservation`),
   KEY `ID_Passager` (`ID_Passager`),
   KEY `ID_Vol` (`ID_Vol`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `reservations`
@@ -271,7 +285,17 @@ CREATE TABLE IF NOT EXISTS `reservations` (
 INSERT INTO `reservations` (`ID_Reservation`, `ID_Passager`, `ID_Vol`, `DateReservation`, `SiegeAttribue`) VALUES
 (7, 1, 2, '2024-03-07', 'A1'),
 (10, 10, 3, '2024-03-05', 'K3'),
-(11, 17, 4, '2024-03-07', 'J6');
+(11, 17, 4, '2024-03-07', 'J6'),
+(20, 11, 5, '2024-03-10', 'A2'),
+(21, 12, 6, '2024-03-11', 'B3'),
+(22, 13, 7, '2024-03-12', 'C4'),
+(23, 14, 8, '2024-03-13', 'D5'),
+(24, 15, 9, '2024-03-14', 'E6'),
+(25, 16, 9, '2024-03-15', 'F7'),
+(26, 17, 10, '2024-03-16', 'G8'),
+(27, 18, 10, '2024-03-17', 'H9'),
+(28, 19, 11, '2024-03-18', 'I10'),
+(29, 20, 11, '2024-03-19', 'J11');
 
 -- --------------------------------------------------------
 
@@ -294,7 +318,7 @@ CREATE TABLE IF NOT EXISTS `vols` (
   KEY `AeroportDepart` (`AeroportDepart`),
   KEY `AeroportArrivee` (`AeroportArrivee`),
   KEY `Avion` (`Avion`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `vols`
@@ -305,7 +329,17 @@ INSERT INTO `vols` (`ID_Vol`, `NumeroVol`, `DateDepart`, `HeureDepart`, `Aeropor
 (3, 'BA456', '2024-03-11', '09:00:00', 1, '2024-03-11', '11:00:00', 1, 11),
 (4, 'LH789', '2024-03-12', '10:00:00', 3, '2024-03-12', '12:00:00', 3, 3),
 (5, 'EK012', '2024-03-13', '11:00:00', 3, '2024-03-13', '13:00:00', 2, 4),
-(6, 'QR3452', '2024-03-15', '12:00:00', 2, '2024-03-14', '14:00:00', 3, 5);
+(6, 'QR3452', '2024-03-15', '12:00:00', 2, '2024-03-14', '14:00:00', 3, 5),
+(7, 'AF456', '2024-03-16', '13:00:00', 1, '2024-03-16', '15:00:00', 2, 2),
+(8, 'BA789', '2024-03-17', '14:00:00', 2, '2024-03-17', '16:00:00', 3, 3),
+(9, 'LH012', '2024-03-18', '15:00:00', 3, '2024-03-18', '17:00:00', 1, 4),
+(10, 'EK345', '2024-03-19', '16:00:00', 1, '2024-03-19', '18:00:00', 2, 5),
+(11, 'QR678', '2024-03-20', '17:00:00', 2, '2024-03-20', '19:00:00', 3, 6),
+(12, 'AF789', '2024-03-21', '18:00:00', 3, '2024-03-21', '20:00:00', 1, 1),
+(13, 'BA012', '2024-03-22', '19:00:00', 1, '2024-03-22', '21:00:00', 2, 2),
+(14, 'LH345', '2024-03-23', '20:00:00', 2, '2024-03-23', '22:00:00', 3, 3),
+(15, 'EK678', '2024-03-24', '21:00:00', 3, '2024-03-24', '23:00:00', 1, 4),
+(16, 'QR012', '2024-03-25', '22:00:00', 1, '2024-03-25', '00:00:00', 2, 5);
 
 -- --------------------------------------------------------
 
@@ -395,17 +429,6 @@ ALTER TABLE `vols`
   ADD CONSTRAINT `vols_ibfk_3` FOREIGN KEY (`Avion`) REFERENCES `avions` (`ID_Avion`);
 COMMIT;
 
--- Autre vue creer
-CREATE OR REPLACE VIEW vue_vols AS
-SELECT v.ID_Vol, v.NumeroVol, v.DateDepart, v.DateArrivee, v.HeureDepart, v.HeureArrivee, 
-       a.Nom AS AeroportDepart, b.Nom AS AeroportArrivee, 
-       av.Modele AS Avion
-FROM vols v
-JOIN aeroports a ON v.AeroportDepart = a.ID_Aeroport
-JOIN aeroports b ON v.AeroportArrivee = b.ID_Aeroport
-JOIN avions av ON v.Avion = av.ID_Avion;
-
-CREATE OR REPLACE VIEW vue_passagers AS
-SELECT pass.ID_Passager, pers.Nom, pers.Prenom, pers.Email, pers.Telephone, pass.NumPasseport
-FROM passagers pass
-JOIN personne pers ON pass.ID_Personne = pers.ID_Personne;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
