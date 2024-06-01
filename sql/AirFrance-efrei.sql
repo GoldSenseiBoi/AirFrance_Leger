@@ -1,5 +1,4 @@
- Base de données : `airfrance`
---
+
 
 -- --------------------------------------------------------
 
@@ -432,3 +431,19 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+---autre vue 
+CREATE OR REPLACE VIEW vue_vols AS
+SELECT v.ID_Vol, v.NumeroVol, v.DateDepart, v.DateArrivee, v.HeureDepart, v.HeureArrivee, 
+       a.Nom AS AeroportDepart, b.Nom AS AeroportArrivee, 
+       av.Modele AS Avion
+FROM vols v
+JOIN aeroports a ON v.AeroportDepart = a.ID_Aeroport
+JOIN aeroports b ON v.AeroportArrivee = b.ID_Aeroport
+JOIN avions av ON v.Avion = av.ID_Avion;
+
+CREATE OR REPLACE VIEW vue_passagers AS
+SELECT pass.ID_Passager, pers.Nom, pers.Prenom, pers.Email, pers.Telephone, pass.NumPasseport
+FROM passagers pass
+JOIN personne pers ON pass.ID_Personne = pers.ID_Personne;
+
