@@ -10,11 +10,11 @@ require_once 'controleur/controleur.class.php';
 $controleur = new Controleur();
 
 // Initialiser la variable $leVol à null
+// Vérification des actions sur les vols
 $leVol = null;
 
-// Vérification des actions sur les vols
-$lesAeroports = $controleur->selectAllAeroports();
-$lesAvions = $controleur->selectAllAvions();
+$lesAeroports = $unControleur->selectAllAeroports();
+$lesAvions = $unControleur->selectAllAvions();
 
 if (isset($_GET['action']) && isset($_GET['idvol'])) {
     $idVol = $_GET['idvol'];
@@ -22,63 +22,59 @@ if (isset($_GET['action']) && isset($_GET['idvol'])) {
 
     switch ($action) {
         case "sup":
-            $controleur->deleteVol($idVol);
-            header("Location: index.php?page=4");
-            exit();
+            $unControleur->deleteVol($idVol);
             break;
         case "edit":
-            $leVol = $controleur->selectWhereVol($idVol);
+            $leVol = $unControleur->selectWhereVol($idVol);
             break;
         case "voir":
-            $detailsVol = $controleur->selectWhereVol($idVol);
+            $detailsVol = $unControleur->selectWhereVol($idVol);
             break;
     }
 }
 
 // Inclusion de la vue pour insérer un vol
-require_once "vue/vue_insert_vols.php";
+require_once("vue/vue_insert_vols.php");
 
 // Insertion d'un nouveau vol
 if (isset($_POST['Valider'])) {
-    $controleur->insertVol($_POST);
-    echo '
-    <script language="javascript">
-     window.location.href="index.php?page=4" ;
-     </script>'; 
-    exit();
+    if ($_POST['AeroportDepart'] !== $_POST['AeroportArrivee']) {
+        $unControleur->insertVol($_POST);
+    } else {
+        echo "L'aéroport de départ et l'aéroport d'arrivée doivent être différents.";
+    }
 }
 
 // Mise à jour d'un vol
 if (isset($_POST['Modifier'])) {
-    $controleur->updateVol($_POST);
-    echo '
-    <script language="javascript">
-     window.location.href="index.php?page=4" ;
-     </script>'; 
-    exit();
+    if ($_POST['AeroportDepart'] !== $_POST['AeroportArrivee']) {
+        $unControleur->updateVol($_POST);
+        header("Location: index.php?page=4");
+    } else {
+        echo "L'aéroport de départ et l'aéroport d'arrivée doivent être différents.";
+    }
 }
 
-// Annulation
 if (isset($_POST['Annuler'])) {
-    echo '
-    <script language="javascript">
-     window.location.href="index.php?page=4" ;
-     </script>'; 
-    exit();
+    $lAeroport = null;
+    header("Location: index.php?page=4");
 }
 
 // Filtrage des vols
 if (isset($_POST['Filtrer'])) {
     $filtre = $_POST['filtre'];
-    $lesVols = $controleur->selectLikeVol($filtre);
+    $lesVols = $unControleur->selectLikeVol($filtre);
 } else {
-    $lesVols = $controleur->selectAllVols();
+    $lesVols = $unControleur->selectAllVols();
 }
 
 // Affichage du nombre de vols
-$nbVols = $controleur->count("vols")['nb'];
+$nbVols = $unControleur->count("vols")['nb'];
 echo "<br> Nombre de vols : " . $nbVols;
 
 // Inclusion de la vue pour afficher la liste des vols
-require_once "vue/vue_select_vols.php";
+require_once("vue/vue_select_vols.php");
+
+// Affichage des détails du vol si disponible
+
 ?>

@@ -4,8 +4,9 @@ if (!isset($leVol)) {
     $leVol = null;
 }
 ?>
+
 <h3>Ajout/Modification d'un vol</h3>
-<form method="post">
+<form method="post" onsubmit="return validateVolForm()">
     <table>
         <tr>
             <td>Numéro de vol</td>
@@ -22,7 +23,7 @@ if (!isset($leVol)) {
         <tr>
             <td>Aéroport de départ</td>
             <td>
-                <select name="AeroportDepart">
+                <select name="AeroportDepart" id="AeroportDepart">
                     <?php foreach ($lesAeroports as $aeroport) : ?>
                         <option value="<?= $aeroport['ID_Aeroport'] ?>" <?= ($leVol != null && $leVol['AeroportDepart'] == $aeroport['ID_Aeroport']) ? 'selected' : '' ?>>
                             <?= $aeroport['Nom'] ?>
@@ -42,7 +43,7 @@ if (!isset($leVol)) {
         <tr>
             <td>Aéroport d'arrivée</td>
             <td>
-                <select name="AeroportArrivee">
+                <select name="AeroportArrivee" id="AeroportArrivee">
                     <?php foreach ($lesAeroports as $aeroport) : ?>
                         <option value="<?= $aeroport['ID_Aeroport'] ?>" <?= ($leVol != null && $leVol['AeroportArrivee'] == $aeroport['ID_Aeroport']) ? 'selected' : '' ?>>
                             <?= $aeroport['Nom'] ?>
@@ -73,3 +74,15 @@ if (!isset($leVol)) {
         <?= ($leVol != null) ? '<input type="hidden" name="ID_Vol" value="'.$leVol['ID_Vol'].'">' : '' ?>
     </table>
 </form>
+
+<script>
+function validateVolForm() {
+    var aeroportDepart = document.getElementById("AeroportDepart").value;
+    var aeroportArrivee = document.getElementById("AeroportArrivee").value;
+    if (aeroportDepart === aeroportArrivee) {
+        alert("L'aéroport de départ et l'aéroport d'arrivée doivent être différents.");
+        return false;
+    }
+    return true;
+}
+</script>
