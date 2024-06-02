@@ -43,3 +43,4 @@
         <?= ($lReservation != null) ? '<input type="hidden" name="ID_Reservation" value="'.$lReservation['ID_Reservation'].'">' : '' ?>
     </table>
 </form>
+<img src="image/plan_avion.png">
