@@ -49,7 +49,10 @@ if (isset($_POST['Valider'])) {
 if (isset($_POST['Modifier'])) {
     if ($_POST['AeroportDepart'] !== $_POST['AeroportArrivee']) {
         $unControleur->updateVol($_POST);
-        header("Location: index.php?page=4");
+        echo '
+        <script language="javascript">
+         window.location.href="index.php?page=4" ;
+         </script>'; 
     } else {
         echo "L'aéroport de départ et l'aéroport d'arrivée doivent être différents.";
     }

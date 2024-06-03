@@ -433,17 +433,72 @@ COMMIT;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 
 ---autre vue 
-CREATE OR REPLACE VIEW vue_vols AS
-SELECT v.ID_Vol, v.NumeroVol, v.DateDepart, v.DateArrivee, v.HeureDepart, v.HeureArrivee, 
-       a.Nom AS AeroportDepart, b.Nom AS AeroportArrivee, 
-       av.Modele AS Avion
-FROM vols v
-JOIN aeroports a ON v.AeroportDepart = a.ID_Aeroport
-JOIN aeroports b ON v.AeroportArrivee = b.ID_Aeroport
-JOIN avions av ON v.Avion = av.ID_Avion;
+
 
 CREATE OR REPLACE VIEW vue_passagers AS
 SELECT pass.ID_Passager, pers.Nom, pers.Prenom, pers.Email, pers.Telephone, pass.NumPasseport
 FROM passagers pass
 JOIN personne pers ON pass.ID_Personne = pers.ID_Personne;
+
+CREATE OR REPLACE VIEW vue_vols AS
+SELECT v.ID_Vol, v.NumeroVol, v.DateDepart, v.DateArrivee, v.HeureDepart, v.HeureArrivee, 
+       IFNULL(a.Nom, 'Aéroport inconnu') AS AeroportDepart, 
+       IFNULL(b.Nom, 'Aéroport inconnu') AS AeroportArrivee, 
+       IFNULL(av.Modele, 'Aucun avion') AS Avion
+FROM vols v
+LEFT JOIN aeroports a ON v.AeroportDepart = a.ID_Aeroport
+LEFT JOIN aeroports b ON v.AeroportArrivee = b.ID_Aeroport
+LEFT JOIN avions av ON v.Avion = av.ID_Avion;
+
+
+
+
+--- procedure stockée
+
+DELIMITER //
+
+CREATE PROCEDURE DeleteAvion(IN avionID INT)
+BEGIN
+    -- Mettre à jour les vols pour supprimer la référence à l'avion
+    UPDATE vols SET Avion = NULL WHERE Avion = avionID;
+
+    -- Supprimer l'avion
+    DELETE FROM avions WHERE ID_Avion = avionID;
+END //
+
+DELIMITER ;
+
+DELIMITER //
+
+CREATE PROCEDURE DeleteVol(IN idVol INT)
+BEGIN
+    -- Mettre à jour les réservations pour supprimer la référence au vol
+    UPDATE reservations SET ID_Vol = NULL WHERE ID_Vol = idVol;
+
+    -- Mettre à jour les membres d'équipage pour supprimer la référence au vol
+    UPDATE membresequipage SET ID_Vol = NULL WHERE ID_Vol = idVol;
+
+    -- Supprimer le vol
+    DELETE FROM vols WHERE ID_Vol = idVol;
+END //
+
+DELIMITER ;
+
+DELIMITER //
+
+CREATE PROCEDURE DeleteAeroport(IN idAeroport INT)
+BEGIN
+    -- Mettre à jour les vols pour supprimer la référence à l'aéroport de départ
+    UPDATE vols SET AeroportDepart = NULL WHERE AeroportDepart = idAeroport;
+
+    -- Mettre à jour les vols pour supprimer la référence à l'aéroport d'arrivée
+    UPDATE vols SET AeroportArrivee = NULL WHERE AeroportArrivee = idAeroport;
+
+    -- Supprimer l'aéroport
+    DELETE FROM aeroports WHERE ID_Aeroport = idAeroport;
+END //
+
+DELIMITER ;
+
+
 

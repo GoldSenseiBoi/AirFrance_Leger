@@ -156,11 +156,12 @@
 		}
 	
 		public function deleteAeroport($idAeroport){
-			$requete = "DELETE FROM aeroports WHERE ID_Aeroport = :idAeroport";
+			$requete = "CALL DeleteAeroport(:idAeroport)";
 			$donnees = array(":idAeroport" => $idAeroport);
 			$delete = $this->unPDO->prepare($requete);
 			$delete->execute($donnees);
 		}
+		
 	
 		public function selectWhereAeroport($idAeroport){
 			$requete = "SELECT * FROM aeroports WHERE ID_Aeroport = :idAeroport";
@@ -206,11 +207,13 @@
 		}
 	
 		public function deleteAvion($idAvion){
-			$requete = "DELETE FROM avions WHERE ID_Avion = :idAvion";
+			$requete = "CALL DeleteAvion(:idAvion)";
 			$donnees = array(":idAvion" => $idAvion);
 			$delete = $this->unPDO->prepare($requete);
 			$delete->execute($donnees);
 		}
+		
+		
 	
 		public function selectWhereAvion($idAvion){
 			$requete = "SELECT * FROM avions WHERE ID_Avion = :idAvion";
@@ -398,10 +401,10 @@
 		}
 	
 		public function deleteVol($idVol){
-			$requete = "DELETE FROM vols WHERE ID_Vol = :idVol";
-			$donnees = array(":idVol" => $idVol);
-			$delete = $this->unPDO->prepare($requete);
-			$delete->execute($donnees);
+			$requete = "CALL DeleteVol(:idVol)";
+    		$donnees = array(":idVol" => $idVol);
+    		$delete = $this->unPDO->prepare($requete);
+    		$delete->execute($donnees);
 		}
 	
 		public function selectWhereVol($idVol){

@@ -2,7 +2,6 @@
 
 <?php
 
-
 $lAvion = null;
 if(isset($_GET['action']) && isset($_GET['idAvion'])){
     $idAvion = $_GET['idAvion']; 
@@ -10,7 +9,7 @@ if(isset($_GET['action']) && isset($_GET['idAvion'])){
 
     switch ($action){
         case "sup" : 
-            $unControleur->deleteAvion($idAvion); 
+            $unControleur->deleteAvion($idAvion);
             break; 
         case "edit" : 
             $lAvion = $unControleur->selectWhereAvion($idAvion);  
@@ -21,14 +20,11 @@ if(isset($_GET['action']) && isset($_GET['idAvion'])){
     }
 }
 
-
 require_once ("vue/vue_insert_avions.php"); 
-
 
 if(isset($_POST['Valider'])){
     $unControleur->insertAvion($_POST);
 }
-
 
 if (isset($_POST['Modifier'])){
     $unControleur->updateAvion($_POST); 
@@ -36,11 +32,10 @@ if (isset($_POST['Modifier'])){
     <script language="javascript">
      window.location.href="index.php?page=3" ;
      </script>'; 
-    
 }
 
 if (isset($_POST['Annuler'])){
-    $lAeroport = null;
+    $lAvion = null;
     header("Location: index.php?page=3");
 }
 
