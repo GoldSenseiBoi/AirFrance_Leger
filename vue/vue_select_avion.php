@@ -7,7 +7,7 @@
     <table class="table table-bordered">
         <thead>
             <tr>
-                <th>Id Avion</th>
+                <th>ID Avion</th>
                 <th>Modèle</th>
                 <th>Nombre de sièges</th>
                 <th>Opération</th>
