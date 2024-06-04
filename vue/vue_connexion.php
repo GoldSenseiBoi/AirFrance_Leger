@@ -14,3 +14,4 @@
 			<td></td>
 			<td> <input type="submit" name="seConnecter" value="Connexion"></td>
 		</tr>
+</form>
