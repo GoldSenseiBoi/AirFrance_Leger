@@ -53,7 +53,7 @@
 		}
 	
 		public function selectLikePassager($filtre){
-			$requete = "SELECT * FROM vue_passagers WHERE NumPasseport LIKE :filtre";
+			$requete = "SELECT * FROM vue_passagers WHERE NumPasseport LIKE :filtre OR Nom LIKE :filtre OR Prenom LIKE :filtre OR Telephone LIKE :filtre OR Email LIKE :filtre";
 			$donnees = array(":filtre" => "%".$filtre."%");
 			$select = $this->unPDO->prepare($requete);
 			$select->execute($donnees);

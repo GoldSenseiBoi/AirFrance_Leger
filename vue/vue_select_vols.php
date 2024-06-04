@@ -3,40 +3,43 @@
     <p>Filtrer par : </p><input type="text" name="filtre">
     <input type="submit" name="Filtrer" value="Filtrer">
 </form>
-<br>
-<table border="1">
-    <tr>
-        <td>ID Vol</td>
-        <td>Numéro de vol</td>
-        <td>Date de départ</td>
-        <td>Heure de départ</td>
-        <td>Aéroport de départ</td>
-        <td>Date d'arrivée</td>
-        <td>Heure d'arrivée</td>
-        <td>Aéroport d'arrivée</td>
-        <td>Avion</td>
-		<td>Opération</td>
-    </tr>
-    <?php
-    if (isset($lesVols)) {
-        foreach ($lesVols as $unVol) {
-            echo "<tr>";
-            echo "<td>".$unVol['ID_Vol']."</td>";
-            echo "<td>".$unVol['NumeroVol']."</td>";
-            echo "<td>".$unVol['DateDepart']."</td>";
-            echo "<td>".$unVol['HeureDepart']."</td>";
-            echo "<td>".$unVol['AeroportDepart']."</td>";
-            echo "<td>".$unVol['DateArrivee']."</td>";
-            echo "<td>".$unVol['HeureArrivee']."</td>";
-            echo "<td>".$unVol['AeroportArrivee']."</td>";
-            echo "<td>".$unVol['Avion']."</td>";
-            echo "<td>";
-            echo "<a href='index.php?page=4&action=sup&idvol=".$unVol['ID_Vol']."'><img src='image/supprimer.png' height='30' width='30'></a>";
-            echo "<a href='index.php?page=4&action=edit&idvol=".$unVol['ID_Vol']."'><img src='image/editer.png' height='30' width='30'></a>";
-            
-            echo "</td>";
-            echo "</tr>";
-        }
-    }
-    ?>
-</table>
+    <br>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>ID Vol</th>
+                <th>Numéro de vol</th>
+                <th>Date de départ</th>
+                <th>Heure de départ</th>
+                <th>Aéroport de départ</th>
+                <th>Date d'arrivée</th>
+                <th>Heure d'arrivée</th>
+                <th>Aéroport d'arrivée</th>
+                <th>Avion</th>
+                <th>Opération</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            if (isset($lesVols)) {
+                foreach ($lesVols as $unVol) {
+                    echo "<tr>";
+                    echo "<td>".$unVol['ID_Vol']."</td>";
+                    echo "<td>".$unVol['NumeroVol']."</td>";
+                    echo "<td>".$unVol['DateDepart']."</td>";
+                    echo "<td>".$unVol['HeureDepart']."</td>";
+                    echo "<td>".$unVol['AeroportDepart']."</td>";
+                    echo "<td>".$unVol['DateArrivee']."</td>";
+                    echo "<td>".$unVol['HeureArrivee']."</td>";
+                    echo "<td>".$unVol['AeroportArrivee']."</td>";
+                    echo "<td>".$unVol['Avion']."</td>";
+                    echo "<td>";
+                    echo "<a href='index.php?page=4&action=sup&idvol=".$unVol['ID_Vol']."'><img src='image/supprimer.png' height='30' width='30'></a>";
+                    echo "<a href='index.php?page=4&action=edit&idvol=".$unVol['ID_Vol']."'><img src='image/editer.png' height='30' width='30'></a>";
+                    echo "</td>";
+                    echo "</tr>";
+                }
+            }
+            ?>
+        </tbody>
+    </table>
