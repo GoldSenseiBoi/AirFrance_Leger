@@ -68,11 +68,17 @@ if (!isset($leVol)) {
             <td></td>
             <td>
                 <input type="submit" <?= ($leVol != null) ? 'name="Modifier" value="Modifier"' : 'name="Valider" value="Valider"' ?>>
-                <input type="reset" name="Annuler" value="Annuler">
+                <input name="Annuler" type="button" onclick="annulerModification()"value="Annuler">
             </td>
         </tr>
         <?= ($leVol != null) ? '<input type="hidden" name="ID_Vol" value="'.$leVol['ID_Vol'].'">' : '' ?>
     </table>
+    <script>
+function annulerModification() {
+    // Redirection vers la page 3
+    window.location.href = "index.php?page=4";
+}
+</script>
 </form>
 
 <script>

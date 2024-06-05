@@ -21,6 +21,7 @@
                     <option value="Copilote" <?= ($lMembre != null && $lMembre['Role'] == 'Copilote') ? 'selected' : '' ?>>Copilote</option>
                     <option value="Hôtesse de l'air" <?= ($lMembre != null && $lMembre['Role'] == 'Hôtesse de l\'air') ? 'selected' : '' ?>>Hôtesse de l'air</option>
                     <option value="Steward" <?= ($lMembre != null && $lMembre['Role'] == 'Steward') ? 'selected' : '' ?>>Steward</option>
+                    <option value="Franck" <?= ($lMembre != null && $lMembre['Role'] == 'franck') ? 'selected' : '' ?>>Franck</option>
                 </select>
             </td>
         </tr>
@@ -36,9 +37,15 @@
             <td></td>
             <td>
                 <input type="submit" <?= ($lMembre != null) ? 'name="Modifier" value="Modifier"' : 'name="Valider" value="Valider"' ?>>
-                <input type="reset" name="Annuler" value="Annuler">
+                <input name="Annuler" type="button" onclick="annulerModification()"value="Annuler">
             </td>
         </tr>
         <?= ($lMembre != null) ? '<input type="hidden" name="ID_MembreEquipage" value="'.$lMembre['ID_MembreEquipage'].'">' : '' ?>
     </table>
+    <script>
+function annulerModification() {
+    // Redirection vers la page 3
+    window.location.href = "index.php?page=7";
+}
+</script>
 </form>

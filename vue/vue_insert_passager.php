@@ -32,9 +32,15 @@ if (!isset($lePassager)) {
             <td></td>
             <td>
                 <input type="submit" <?= ($lePassager != null) ? 'name="Modifier" value="Modifier"' : 'name="Valider" value="Valider"' ?>>
-                <input type="reset" name="Annuler" value="Annuler">
+                <input name="Annuler" type="button" onclick="annulerModification()"value="Annuler">
             </td>
         </tr>
         <?= ($lePassager != null) ? '<input type="hidden" name="ID_Passager" value="'.$lePassager['ID_Passager'].'">' : '' ?>
     </table>
+    <script>
+function annulerModification() {
+    
+    window.location.href = "index.php?page=6";
+}
+</script>
 </form>

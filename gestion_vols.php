@@ -61,9 +61,14 @@ if (isset($_POST['Modifier'])) {
 if (isset($_POST['Annuler'])) {
     $lAeroport = null;
     echo '
-        <script language="javascript">
-         window.location.href="index.php?page=4" ;
-         </script>';
+        <script language="javascript">window.location.href="index.php?page=4" ;
+    </script>';
+
+    
+
+        
+
+        
 }
 
 // Filtrage des vols

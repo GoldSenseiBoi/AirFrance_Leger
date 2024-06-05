@@ -13,9 +13,15 @@
             <td></td>
             <td>
                 <input type="submit" <?= ($lAeroport != null) ? 'name="Modifier" value="Modifier"' : 'name="Valider" value="Valider"' ?>>
-                <input type="reset" name="Annuler" value="Annuler">
+                <input name="Annuler" type="button" onclick="annulerModification()"value="Annuler">
             </td>
         </tr>
         <?= ($lAeroport != null) ? '<input type="hidden" name="ID_Aeroport" value="'.$lAeroport['ID_Aeroport'].'">' : '' ?>
     </table>
+    <script>
+function annulerModification() {
+    
+    window.location.href = "index.php?page=2";
+}
+</script>
 </form>

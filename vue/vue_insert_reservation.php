@@ -37,10 +37,16 @@
             <td></td>
             <td>
                 <input type="submit" <?= ($lReservation != null) ? 'name="Modifier" value="Modifier"' : 'name="Valider" value="Valider"' ?>>
-                <input type="reset" name="Annuler" value="Annuler">
+                <input name="Annuler" type="button" onclick="annulerModification()"value="Annuler">
             </td>
         </tr>
         <?= ($lReservation != null) ? '<input type="hidden" name="ID_Reservation" value="'.$lReservation['ID_Reservation'].'">' : '' ?>
     </table>
+    <script>
+function annulerModification() {
+    // Redirection vers la page 3
+    window.location.href = "index.php?page=5";
+}
+</script>
 </form>
 <img src="image/plan_avion.png">
