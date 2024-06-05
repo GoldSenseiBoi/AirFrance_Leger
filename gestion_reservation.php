@@ -42,7 +42,10 @@ if (isset($_POST['Modifier'])){
 
 if (isset($_POST['Annuler'])){
     $lAeroport = null;
-    header("Location: index.php?page=5");
+    echo '
+    <script language="javascript">
+     window.location.href="index.php?page=5" ;
+     </script>'; 
 }
 
 // Filtrage des réservations

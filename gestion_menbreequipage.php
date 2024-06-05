@@ -38,7 +38,10 @@ if (isset($_POST['Modifier'])) {
 
 if (isset($_POST['Annuler'])) {
     $lAeroport = null;
-    header("Location: index.php?page=7");
+    echo '
+    <script language="javascript">
+     window.location.href="index.php?page=7";
+     </script>';
 }
 
 // Filtrage des membres d'équipage

@@ -36,7 +36,10 @@ if (isset($_POST['Modifier'])){
 
 if (isset($_POST['Annuler'])){
     $lAvion = null;
-    header("Location: index.php?page=3");
+    echo '
+    <script language="javascript">
+     window.location.href="index.php?page=3" ;
+     </script>';
 }
 
 // Filtrage des avions

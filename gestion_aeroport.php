@@ -45,7 +45,10 @@ echo '<h2> Gestion des aéroports </h2><br /><br />';
 
     if (isset($_POST['Annuler'])){
         $lAeroport = null;
-        header("Location: index.php?page=2");
+        echo '
+       <script language="javascript">
+        window.location.href="index.php?page=2" ;
+        </script>';
     }
 
 // Filtrage des aéroports
