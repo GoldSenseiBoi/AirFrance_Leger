@@ -11,7 +11,8 @@
         </tr>
         <tr>
             <td>ID Personne</td>
-            <td><input type="text" name="ID_Personne" value="<?= ($lMembre != null) ? $lMembre['ID_Personne'] : '' ?>" ></td>
+            <td><input type="text" name="ID_Personne" value="<?= ($lMembre != null) ? $lMembre['ID_Personne'] : '' ?>"  readonly></td>
+
         </tr>
         <tr>
             <td>Rôle</td>
@@ -44,7 +45,7 @@
     </table>
     <script>
 function annulerModification() {
-    // Redirection vers la page 3
+    // Redirection vers la page 7
     window.location.href = "index.php?page=7";
 }
 </script>

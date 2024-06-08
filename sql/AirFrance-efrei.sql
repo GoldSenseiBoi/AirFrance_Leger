@@ -500,5 +500,49 @@ END //
 
 DELIMITER ;
 
+DELIMITER //
 
+CREATE PROCEDURE DeletePassager(IN passagerID INT)
+BEGIN
+    -- Supprimer les réservations associées au passager
+    DELETE FROM Reservations
+    WHERE ID_Passager = passagerID;
+
+    -- Supprimer le passager de la table Passagers
+    DELETE FROM Passagers
+    WHERE ID_Passager = passagerID;
+END //
+
+DELIMITER ;
+
+
+DELIMITER //
+
+CREATE PROCEDURE InsertMembreEquipage(
+    IN pNom VARCHAR(255),
+    IN pPrenom VARCHAR(255),
+    IN pRole VARCHAR(255),
+    IN pDateEmbauche DATE,
+    IN pID_Vol INT
+)
+BEGIN
+    DECLARE lastPersonID INT;
+
+    -- Insérer une nouvelle personne
+    INSERT INTO personne (Nom, Prenom)
+    VALUES (pNom, pPrenom);
+
+    -- Obtenir l'ID de la personne insérée
+    SET lastPersonID = LAST_INSERT_ID();
+
+    -- Insérer un nouveau membre d'équipage en utilisant l'ID de la personne
+    INSERT INTO membresequipage (ID_Personne, Role, DateEmbauche, ID_Vol)
+    VALUES (lastPersonID, pRole, pDateEmbauche, pID_Vol);
+
+    -- Insérer un nouveau passager en utilisant l'ID de la personne
+    INSERT INTO passagers (ID_Personne)
+    VALUES (lastPersonID);
+END //
+
+DELIMITER ;
 

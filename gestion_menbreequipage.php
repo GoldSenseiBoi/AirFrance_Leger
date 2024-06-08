@@ -24,6 +24,13 @@ if (isset($_GET['action']) && isset($_GET['idmembreequipage'])) {
 require_once("vue/vue_insert_membreequipage.php"); 
 
 if (isset($_POST['Valider'])) {
+    $tab = [
+        'Nom' => $_POST['Nom'],
+        'Prenom' => $_POST['Prenom'],
+        'Role' => $_POST['Role'],
+        'DateEmbauche' => $_POST['DateEmbauche'],
+        'ID_Vol' => $_POST['ID_Vol']
+    ];
     $unControleur->insertMembresEquipage($_POST);
 }
 

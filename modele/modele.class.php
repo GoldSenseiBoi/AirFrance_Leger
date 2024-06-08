@@ -60,27 +60,11 @@
 			return $select->fetchAll();
 		}
 	
-		public function deletePassager($idPassager) {
-			if ($this->unPDO != null) {
-				try {
-					$this->unPDO->beginTransaction();
-	
-					// Suppression dans la table passagers
-					$requetePassager = "DELETE FROM passagers WHERE ID_Passager = :ID_Passager";
-					$deletePassager = $this->unPDO->prepare($requetePassager);
-					$deletePassager->execute(array(":ID_Passager" => $idPassager));
-	
-					// Suppression dans la table personne
-					$requetePersonne = "DELETE FROM personne WHERE ID_Personne = (SELECT ID_Personne FROM passagers WHERE ID_Passager = :ID_Passager)";
-					$deletePersonne = $this->unPDO->prepare($requetePersonne);
-					$deletePersonne->execute(array(":ID_Passager" => $idPassager));
-	
-					$this->unPDO->commit();
-				} catch (PDOException $e) {
-					$this->unPDO->rollBack();
-					echo "Erreur : " . $e->getMessage();
-				}
-			}
+		public function deletePassager($idPassager){
+			$requete = "CALL DeletePassager(:passagerID)";
+			$donnees = array(":passagerID" => $idPassager);
+			$delete = $this->unPDO->prepare($requete);
+			$delete->execute($donnees);
 		}
 	
 	
@@ -234,26 +218,16 @@
 			$update->execute($donnees);
 		}
 		public function insertMembresEquipage($tab) {
-			$requete = "INSERT INTO membresequipage (ID_Personne, Role, DateEmbauche, ID_Vol) VALUES (:idPersonne, :role, :dateEmbauche, :idVol)";
-			$donnees = array(
-				":idPersonne" => $tab['ID_Personne'],
-				":role" => $tab['Role'],
-				":dateEmbauche" => $tab['DateEmbauche'],
-				":idVol" => $tab['ID_Vol']
-			);
-			$insert = $this->unPDO->prepare($requete);
-			$insert->execute($donnees);
-		
-			// Mise à jour des champs Nom et Prenom dans la table personne
-			$requetePersonne = "UPDATE personne SET Nom = :nom, Prenom = :prenom WHERE ID_Personne = :idPersonne";
-			$donneesPersonne = array(
-				":nom" => $tab['Nom'],
-				":prenom" => $tab['Prenom'],
-				":idPersonne" => $tab['ID_Personne']
-			);
-			$updatePersonne = $this->unPDO->prepare($requetePersonne);
-			$updatePersonne->execute($donneesPersonne);
-		}
+			$requete = "CALL InsertMembreEquipage(:Nom, :Prenom, :Role, :DateEmbauche, :ID_Vol)";
+			$stmt = $this->unPDO->prepare($requete);
+			$stmt->execute([
+				':Nom' => $tab['Nom'],
+				':Prenom' => $tab['Prenom'],
+				':Role' => $tab['Role'],
+				':DateEmbauche' => $tab['DateEmbauche'],
+				':ID_Vol' => $tab['ID_Vol']
+			]);
+		}		
 	
 		public function selectAllMembresEquipage(){
 			$requete = "SELECT me.ID_MembreEquipage, me.ID_Personne, p.Nom, p.Prenom, me.Role, me.DateEmbauche, me.ID_Vol FROM membresequipage me JOIN personne p ON me.ID_Personne = p.ID_Personne";
