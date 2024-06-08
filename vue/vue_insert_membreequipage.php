@@ -31,8 +31,14 @@
             <td><input type="date" name="DateEmbauche" value="<?= ($lMembre != null) ? $lMembre['DateEmbauche'] : '' ?>"></td>
         </tr>
         <tr>
-            <td>ID Vol</td>
-            <td><input type="text" name="ID_Vol" value="<?= ($lMembre != null) ? $lMembre['ID_Vol'] : '' ?>"></td>
+        <td>Numéro de Vol</td>
+            <td>
+                <select name="ID_Vol">
+                    <?php foreach ($lesVols as $vol): ?>
+                        <option value="<?= $vol['ID_Vol'] ?>" <?= ($lMembre != null && $lMembre['ID_Vol'] == $vol['ID_Vol']) ? 'selected' : '' ?>><?= $vol['NumeroVol'] ?></option>
+                    <?php endforeach; ?>
+                </select>
+            </td>
         </tr>
         <tr>
             <td></td>
