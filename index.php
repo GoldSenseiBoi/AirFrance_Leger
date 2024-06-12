@@ -174,7 +174,7 @@
 			case 7 : require_once ("gestion_menbreequipage.php"); break;
 			case 8 : session_destroy();
 			unset($_SESSION['email']);
-			header("Location: index.php?page=1");
+			header("Location: index.php");
 			break;
 		}
 echo '
