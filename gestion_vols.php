@@ -1,20 +1,15 @@
-<h2> Gestion des vols </h2><br /><br />
-
+<!-- gestion_vols.php -->
+<h2>Gestion des vols</h2>
 <?php
-// Inclure les classes nécessaires
 require_once 'modele/modele.class.php';
 require_once 'controleur/controleur.class.php';
 
-
-// Créer une instance du contrôleur
 $controleur = new Controleur();
 
-// Initialiser la variable $leVol à null
-// Vérification des actions sur les vols
-$leVol = null;
+$lVol = null;
 
-$lesAeroports = $unControleur->selectAllAeroports();
-$lesAvions = $unControleur->selectAllAvions();
+$lesAeroports = $controleur->selectAllAeroports();
+$lesAvions = $controleur->selectAllAvions();
 
 if (isset($_GET['action']) && isset($_GET['idvol'])) {
     $idVol = $_GET['idvol'];
@@ -22,13 +17,13 @@ if (isset($_GET['action']) && isset($_GET['idvol'])) {
 
     switch ($action) {
         case "sup":
-            $unControleur->deleteVol($idVol);
+            $controleur->deleteVol($idVol);
             break;
         case "edit":
-            $leVol = $unControleur->selectWhereVol($idVol);
+            $lVol = $controleur->selectWhereVol($idVol);
             break;
         case "voir":
-            $detailsVol = $unControleur->selectWhereVol($idVol);
+            $detailsVol = $controleur->selectWhereVol($idVol);
             break;
     }
 }
@@ -39,7 +34,8 @@ require_once("vue/vue_insert_vols.php");
 // Insertion d'un nouveau vol
 if (isset($_POST['Valider'])) {
     if ($_POST['AeroportDepart'] !== $_POST['AeroportArrivee']) {
-        $unControleur->insertVol($_POST);
+        $controleur->insertVol($_POST);
+        echo "Vol ajouté avec succès.";
     } else {
         echo "L'aéroport de départ et l'aéroport d'arrivée doivent être différents.";
     }
@@ -48,39 +44,44 @@ if (isset($_POST['Valider'])) {
 // Mise à jour d'un vol
 if (isset($_POST['Modifier'])) {
     if ($_POST['AeroportDepart'] !== $_POST['AeroportArrivee']) {
-        $unControleur->updateVol($_POST);
+        $controleur->updateVol($_POST);
         echo '
         <script language="javascript">
-         window.location.href="index.php?page=4" ;
-         </script>'; 
+        window.location.href="index.php?page=4";
+        </script>';
     } else {
         echo "L'aéroport de départ et l'aéroport d'arrivée doivent être différents.";
     }
 }
 
 if (isset($_POST['Annuler'])) {
-    $lAeroport = null;
+    $lVol = null;
     echo '
-        <script language="javascript">window.location.href="index.php?page=4" ;
+    <script language="javascript">
+    window.location.href="index.php?page=4";
     </script>';
-
-    
-
-        
-
-        
 }
 
-// Filtrage des vols
+// Filtrage et tri des vols
+$order = 'DESC';
+if (isset($_POST['Trier'])) {
+    if ($_POST['tri'] == 'recentes') {
+        $order = 'DESC';
+    } elseif ($_POST['tri'] == 'anciennes') {
+        $order = 'ASC';
+    }
+}
+
 if (isset($_POST['Filtrer'])) {
+    $champ = $_POST['champ_filtre'];
     $filtre = $_POST['filtre'];
-    $lesVols = $unControleur->selectLikeVol($filtre);
+    $lesVols = $controleur->selectLikeVols($champ, $filtre);
 } else {
-    $lesVols = $unControleur->selectAllVols();
+    $lesVols = $controleur->selectAllVols($order);
 }
 
 // Affichage du nombre de vols
-$nbVols = $unControleur->count("vols")['nb'];
+$nbVols = $controleur->count("vols")['nb'];
 echo "<br> Nombre de vols : " . $nbVols;
 
 // Inclusion de la vue pour afficher la liste des vols

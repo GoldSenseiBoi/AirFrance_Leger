@@ -8,6 +8,16 @@
 		public function __construct(){
 			$this->unModele= new Modele();
 		}
+		public function updateProfil($email, $prenom, $mdp = null) {
+			$this->unModele->updateProfil($email, $prenom, $mdp);
+		}
+		public function verifConnexion($email, $mdp) {
+			$user = $this->unModele->getUserByEmail($email);
+			if ($user && password_verify($mdp, $user['MotDePasse'])) {
+				return $user;
+			}
+			return null;
+		}
 		public function insertPassagers ($tab){
 			$this->unModele->insertPassagers ($tab);
 		}
@@ -62,14 +72,12 @@
 		public function updateAeroport($tab){
 			$this->unModele->updateAeroport($tab);
 		}
-		public function insertReservation($tab){
-			$this->unModele->insertReservation($tab);
+		
+		public function selectAllReservations($order = 'DESC') {
+			return $this->unModele->selectAllReservations($order);
 		}
-		public function selectAllReservations(){
-			return $this->unModele->selectAllReservations();
-		}
-		public function selectLikeReservation($filtre){
-			return $this->unModele->selectLikeReservation($filtre);
+		public function selectLikeReservation($champ, $filtre) {
+			return $this->unModele->selectLikeReservation($champ, $filtre);
 		}
 		public function deleteReservation($idReservation){
 			$this->unModele->deleteReservation($idReservation);
@@ -77,17 +85,15 @@
 		public function selectWhereReservation($idReservation){
 			return $this->unModele->selectWhereReservation($idReservation);
 		}
-		public function updateReservation($tab){
-			$this->unModele->updateReservation($tab);
-		}
+		
 		public function insertVol($tab){
 			$this->unModele->insertVol($tab);
 		}
-		public function selectAllVols(){
-			return $this->unModele->selectAllVols();
+		public function selectAllVols($order = 'DESC') {
+			return $this->unModele->selectAllVols($order);
 		}
-		public function selectLikeVol($filtre){
-			return $this->unModele->selectLikeVol($filtre);
+		public function selectLikeVols($champ, $filtre) {
+			return $this->unModele->selectLikeVols($champ, $filtre);
 		}
 		public function deleteVol($idVol){
 			$this->unModele->deleteVol($idVol);
@@ -101,11 +107,12 @@
 		public function insertMembresEquipage($tab){
 			$this->unModele->insertMembresEquipage($tab);
 		}
-		public function selectAllMembresEquipage(){
-			return $this->unModele->selectAllMembresEquipage();
+		public function selectAllMembresEquipage($order = 'DESC') {
+			return $this->unModele->selectAllMembresEquipage($order);
 		}
-		public function selectLikeMembresEquipage($filtre){
-			return $this->unModele->selectLikeMembresEquipage($filtre);
+		
+		public function selectLikeMembresEquipage($champ, $filtre) {
+			return $this->unModele->selectLikeMembresEquipage($champ, $filtre);
 		}
 		public function deleteMembreEquipage($idMembreEquipage){
 			$this->unModele->deleteMembreEquipage($idMembreEquipage);
@@ -119,10 +126,27 @@
 		public function count ($table){
 			return $this->unModele->count($table);
 		}
-		public function verifConnexion ($email, $mdp){
-			return $this->unModele->verifConnexion($email, $mdp);
+		
+		public function verifDateReservation($idVol, $dateReservation) {
+			$dateDepart = $this->unModele->getVolDateDepart($idVol);
+			if ($dateDepart) {
+				return strtotime($dateReservation) <= strtotime($dateDepart);
+			} else {
+				echo "Erreur : La date de départ du vol n'a pas pu être récupérée.";
+				return false;
+			}
 		}
-
+	
+		// Méthodes d'insertion et de mise à jour des réservations
+		public function insertReservation($tab) {
+			
+			$this->unModele->insertReservation($tab);
+		}
+	
+		public function updateReservation($tab) {
+			
+			$this->unModele->updateReservation($tab);
+		}
 		
 	}
 ?>

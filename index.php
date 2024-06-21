@@ -154,7 +154,18 @@
 						</div>
 					</div>
 				</div>
-				';
+				<div class="row justify-content-center">
+				<div class="col-md-3">
+					<div class="card text-center">
+						<div class="card-body">
+							<a href="index.php?page=9" title="Gestion de profil">
+								<img src="image/profil.png" class="card-img-top" alt="Gestion de profil">
+							</a>
+							<h5 class="card-title">Gestion de profil</h5>
+						</div>
+					</div>
+				</div>
+			</div>';
 				
 		
 			
@@ -174,8 +185,12 @@
 			case 7 : require_once ("gestion_menbreequipage.php"); break;
 			case 8 : session_destroy();
 			unset($_SESSION['email']);
-			header("Location: index.php");
+			echo '
+    <script language="javascript">
+     window.location.href="index.php" ;
+     </script>';
 			break;
+			case 9 : require_once ("gestion_profil.php"); break;
 		}
 echo '
 	</div><br /><br />

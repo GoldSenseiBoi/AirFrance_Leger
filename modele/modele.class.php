@@ -12,6 +12,39 @@
 				echo "Erreur de connexion: ".$exp->getMessage();
 			}
 		}
+
+		public function updateProfil($email, $prenom, $mdp = null) {
+			$sql = "UPDATE admin SET Prenom = :prenom, Email = :email";
+			if ($mdp != null) {
+				$sql .= ", MotDePasse = :mdp";
+			}
+			$sql .= " WHERE Email = :email_actuel";
+	
+			$params = array(
+				":prenom" => $prenom,
+				":email" => $email,
+				":email_actuel" => $_SESSION['email']
+			);
+	
+			if ($mdp != null) {
+				$params[":mdp"] = password_hash($mdp, PASSWORD_BCRYPT);
+			}
+	
+			$stmt = $this->unPDO->prepare($sql);
+			$stmt->execute($params);
+	
+			// Mettre à jour les informations de session
+			$_SESSION['prenom'] = $prenom;
+			$_SESSION['email'] = $email;
+		}
+
+		public function getUserByEmail($email) {
+			$sql = "SELECT * FROM admin WHERE Email = :email";
+			$stmt = $this->unPDO->prepare($sql);
+			$stmt->execute(array(':email' => $email));
+			return $stmt->fetch(PDO::FETCH_ASSOC);
+		}
+
 		public function insertPassagers($tab) {
 			if ($this->unPDO != null) {
 				try {
@@ -229,22 +262,25 @@
 			]);
 		}		
 	
-		public function selectAllMembresEquipage(){
-			$requete = "SELECT me.ID_MembreEquipage, me.ID_Personne, p.Nom, p.Prenom, me.Role, me.DateEmbauche, me.ID_Vol FROM membresequipage me JOIN personne p ON me.ID_Personne = p.ID_Personne";
-			$select = $this->unPDO->prepare($requete);
-			$select->execute();
-			return $select->fetchAll();
-		}
-	
-		public function selectLikeMembresEquipage($filtre) {
+		public function selectAllMembresEquipage($order = 'DESC') {
 			$requete = "SELECT me.ID_MembreEquipage, me.ID_Personne, p.Nom, p.Prenom, me.Role, me.DateEmbauche, me.ID_Vol 
 						FROM membresequipage me 
-						JOIN personne p ON me.ID_Personne = p.ID_Personne
-						WHERE me.Role LIKE :filtre OR p.Nom LIKE :filtre OR p.Prenom LIKE :filtre OR me.ID_Vol LIKE :filtre";
+						JOIN personne p ON me.ID_Personne = p.ID_Personne 
+						ORDER BY me.DateEmbauche $order";
+			$select = $this->unPDO->prepare($requete);
+			$select->execute();
+			return $select->fetchAll(PDO::FETCH_ASSOC);
+		}
+		
+		public function selectLikeMembresEquipage($champ, $filtre) {
+			$requete = "SELECT me.ID_MembreEquipage, me.ID_Personne, p.Nom, p.Prenom, me.Role, me.DateEmbauche, me.ID_Vol 
+						FROM membresequipage me 
+						JOIN personne p ON me.ID_Personne = p.ID_Personne 
+						WHERE $champ LIKE :filtre";
 			$donnees = array(":filtre" => "%".$filtre."%");
 			$select = $this->unPDO->prepare($requete);
 			$select->execute($donnees);
-			return $select->fetchAll();
+			return $select->fetchAll(PDO::FETCH_ASSOC);
 		}
 	
 		public function deleteMembreEquipage($idMembreEquipage) {
@@ -289,31 +325,20 @@
 			$updatePersonne->execute($donneesPersonne);
 		}
 		
-		public function insertReservation($tab){
-			$requete = "INSERT INTO reservations (ID_Passager, ID_Vol, DateReservation, SiegeAttribue) VALUES (:idPassager, :idVol, :dateReservation, :siegeAttribue)";
-			$donnees = array(
-				":idPassager" => $tab['ID_Passager'],
-				":idVol" => $tab['ID_Vol'],
-				":dateReservation" => $tab['DateReservation'],
-				":siegeAttribue" => $tab['SiegeAttribue']
-			);
-			$insert = $this->unPDO->prepare($requete);
-			$insert->execute($donnees);
-		}
+		
 	
-		public function selectAllReservations(){
-			$requete = "SELECT * FROM reservations";
+		public function selectAllReservations($order = 'DESC'){
+			$requete = "SELECT * FROM vue_reservations ORDER BY DateReservation $order";
 			$select = $this->unPDO->prepare($requete);
 			$select->execute();
-			return $select->fetchAll();
+			return $select->fetchAll(PDO::FETCH_ASSOC);
 		}
-	
-		public function selectLikeReservation($filtre){
-			$requete = "SELECT * FROM reservations WHERE SiegeAttribue LIKE :filtre";
+		public function selectLikeReservation($champ, $filtre){
+			$requete = "SELECT * FROM vue_reservations WHERE $champ LIKE :filtre";
 			$donnees = array(":filtre" => "%".$filtre."%");
 			$select = $this->unPDO->prepare($requete);
 			$select->execute($donnees);
-			return $select->fetchAll();
+			return $select->fetchAll(PDO::FETCH_ASSOC);
 		}
 	
 		public function deleteReservation($idReservation){
@@ -328,21 +353,10 @@
 			$donnees = array(":idReservation" => $idReservation);
 			$select = $this->unPDO->prepare($requete);
 			$select->execute($donnees);
-			return $select->fetch();
+			return $select->fetch(PDO::FETCH_ASSOC);
 		}
 	
-		public function updateReservation($tab){
-			$requete = "UPDATE reservations SET ID_Passager = :idPassager, ID_Vol = :idVol, DateReservation = :dateReservation, SiegeAttribue = :siegeAttribue WHERE ID_Reservation = :idReservation";
-			$donnees = array(
-				":idReservation" => $tab['ID_Reservation'],
-				":idPassager" => $tab['ID_Passager'],
-				":idVol" => $tab['ID_Vol'],
-				":dateReservation" => $tab['DateReservation'],
-				":siegeAttribue" => $tab['SiegeAttribue']
-			);
-			$update = $this->unPDO->prepare($requete);
-			$update->execute($donnees);
-		}
+		
 		public function insertVol($tab){
 			$requete = "INSERT INTO vols (NumeroVol, DateDepart, HeureDepart, AeroportDepart, DateArrivee, HeureArrivee, AeroportArrivee, Avion) VALUES (:numeroVol, :dateDepart, :heureDepart, :aeroportDepart, :dateArrivee, :heureArrivee, :aeroportArrivee, :avion)";
 			$donnees = array(
@@ -359,19 +373,19 @@
 			$insert->execute($donnees);
 		}
 	
-		public function selectAllVols(){
-			$requete = "SELECT * FROM vue_vols";
+		public function selectAllVols($order = 'DESC'){
+			$requete = "SELECT * FROM vue_vols ORDER BY DateDepart $order";
 			$select = $this->unPDO->prepare($requete);
 			$select->execute();
-			return $select->fetchAll();
+			return $select->fetchAll(PDO::FETCH_ASSOC);
 		}
 	
-		public function selectLikeVol($filtre){
-			$requete = "SELECT * FROM vue_vols WHERE NumeroVol LIKE :filtre OR AeroportDepart LIKE :filtre OR AeroportArrivee LIKE :filtre OR Avion LIKE :filtre";
+		public function selectLikeVols($champ, $filtre){
+			$requete = "SELECT * FROM vue_vols WHERE $champ LIKE :filtre";
 			$donnees = array(":filtre" => "%".$filtre."%");
 			$select = $this->unPDO->prepare($requete);
 			$select->execute($donnees);
-			return $select->fetchAll();
+			return $select->fetchAll(PDO::FETCH_ASSOC);
 		}
 	
 		public function deleteVol($idVol){
@@ -417,6 +431,41 @@
 			$select=$this->unPDO->prepare($requete);
 			$select->execute($donnees);
 			return $select->fetch();
+		}
+
+		public function getVolDateDepart($idVol) {
+			$sql = "SELECT DateDepart FROM vols WHERE ID_Vol = :idVol";
+			$stmt = $this->unPDO->prepare($sql);
+			$stmt->execute(array(':idVol' => $idVol));
+			$result = $stmt->fetch(PDO::FETCH_ASSOC);
+			
+			return $result['DateDepart'];
+		}
+	
+		// Méthode pour insérer une réservation
+		public function insertReservation($tab) {
+			$requete = "INSERT INTO reservations (ID_Passager, ID_Vol, DateReservation, SiegeAttribue) VALUES (:idPassager, :idVol, :dateReservation, :siegeAttribue)";
+			$donnees = array(
+				":idPassager" => $tab['ID_Passager'],
+				":idVol" => $tab['ID_Vol'],
+				":dateReservation" => $tab['DateReservation'],
+				":siegeAttribue" => $tab['SiegeAttribue']
+			);
+			$insert = $this->unPDO->prepare($requete);
+			$insert->execute($donnees);
+		}
+	
+		public function updateReservation($tab) {
+			$requete = "UPDATE reservations SET ID_Passager = :idPassager, ID_Vol = :idVol, DateReservation = :dateReservation, SiegeAttribue = :siegeAttribue WHERE ID_Reservation = :idReservation";
+			$donnees = array(
+				":idReservation" => $tab['ID_Reservation'],
+				":idPassager" => $tab['ID_Passager'],
+				":idVol" => $tab['ID_Vol'],
+				":dateReservation" => $tab['DateReservation'],
+				":siegeAttribue" => $tab['SiegeAttribue']
+			);
+			$update = $this->unPDO->prepare($requete);
+			$update->execute($donnees);
 		}
         
 	}

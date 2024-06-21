@@ -1,6 +1,6 @@
 <img src="image/airfr.jpg" height="200" width="300">
 <h1>Connexion à l'intranet Air France</h1>
-<form method="post">
+<form method="post" >
 	<table>
 		<tr>
 			<td>Email:</td>
